@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: 'pages#index'
+  root to: 'static_pages#root'
   get '/auth/:provider/callback', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 

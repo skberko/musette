@@ -10,5 +10,5 @@ var MyComponent = React.createClass({
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  ReactDOM.render(<MyComponent />, document.getElementById('main'));
+  ReactDOM.render(<MyComponent />, document.getElementById('root'));
 });
