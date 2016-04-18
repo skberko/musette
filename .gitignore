@@ -14,3 +14,10 @@
 
 # Ignore application configuration
 /config/application.yml
+
+# npm packages
+node_modules
+
+# webpack bundle
+bundle.js
+bundle.js.map
