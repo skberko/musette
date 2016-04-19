@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var ApiUtil = require('./util/apiUtil') // can be removed once flux cycle is in place
 
 var Musette = React.createClass({
   render: function () {

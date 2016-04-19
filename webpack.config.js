@@ -5,9 +5,10 @@ module.exports = {
   entry: "./frontend/musette.jsx",
   output: {
     path: path.join(__dirname, 'app', 'assets', 'javascripts'),
-    filename: "bundle.js",
-    devtoolModuleFilenameTemplate: '[resourcePath]',
-    devtoolFallbackModuleFilenameTemplate: '[resourcePath]?[hash]'
+    filename: "bundle.js"
+  },
+  resolve: {
+    extensions: ["", ".js", ".jsx"]
   },
   module: {
     loaders: [
@@ -16,13 +17,24 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: 'babel',
         query: {
-          presets: ["react"]
+          presets: ['react']
         }
+      },
+      {
+        test: /\.node$/,
+        loader: "node-loader"
       }
     ]
   },
   devtool: 'source-maps',
-  resolve: {
-    extensions: ["", ".js", ".jsx" ]
-  }
+  plugins: [
+        function() {
+            this.plugin('watch-run', function(watching, callback) {
+                console.log("\n\n-----------------------------------------");
+                console.log('Compiled at: ' + new Date());
+                console.log();
+                callback();
+            })
+        }
+    ]
 };
