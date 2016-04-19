@@ -1,4 +1,4 @@
-// var ApiActions = require('../actions/activityActions.js');
+var ActivityActions = require('../actions/activityActions.js');
 
 var ApiUtil = {
   fetchAllActivities: function () {
@@ -6,7 +6,7 @@ var ApiUtil = {
       url: "api/activities",
       success: function (activities) {
         console.log(activities)
-        // ApiActions.receiveAllActivities(activities);
+        ActivityActions.receiveAllActivities(activities);
       }
     })
   },
@@ -16,7 +16,7 @@ var ApiUtil = {
       url: "api/activity_streams/" + id,
       success: function (activityStream) {
         console.log(activityStream)
-        // ApiActions.receiveSinglePokemon(pokemon);
+        // ActivityActions.receiveSingleActivity(activity);
       }
     })
   }

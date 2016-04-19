@@ -1,20 +1,21 @@
 var Dispatcher = require('../dispatcher/dispatcher.js');
-var PokemonConstants = require('../constants/pokemonConstants.js');
+var ActivityConstants = require('../constants/activityConstants.js');
 
-var activityActions = {
-  receiveAllPokemons: function (activities) {
+var ActivityActions = {
+  receiveAllActivities: function (activities) {
     Dispatcher.dispatch({
-      actionType: ActivityConstants.POKEMONS_RECEIVED,
+      actionType: ActivityConstants.ACTIVITIES_RECEIVED,
       activities: activities
     });
   },
 
-  receiveSinglePokemon: function (pokemon) {
+  receiveSingleActivity: function (activity) {
     Dispatcher.dispatch({
-      actionType: PokemonConstants.POKEMON_RECEIVED,
-      pokemon: pokemon
+      actionType: ActivityConstants.ACTIVITY_RECEIVED,
+      activity: activity
     });
   }
 }
 
-module.exports = ActivityAction
+module.exports = ActivityActions;
+window.ActivityActions = ActivityActions;
