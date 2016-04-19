@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
   def destroy
     if current_user
       session.delete(:user_id)
-      flash[:success] = "Sign out successful. See ya later!"
+      # flash[:success] = "Sign out successful. See ya later!"
     end
     redirect_to root_path
   end
