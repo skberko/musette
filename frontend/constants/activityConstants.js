@@ -1,0 +1,3 @@
+module.exports = {
+  ACTIVITIES_RECEIVED: "ACTIVITIES_RECEIVED"
+};

@@ -5,33 +5,25 @@ var ApiUtil = {
     $.ajax({
       url: "api/activities",
       success: function (activities) {
-        ApiActions.receiveAllActivities(activities);
+        console.log(activities)
+        // ApiActions.receiveAllActivities(activities);
+      }
+    })
+  },
+
+  fetchActivityStream: function (id) {
+    $.ajax({
+      url: "api/activity_streams/" + id,
+      success: function (activityStream) {
+        console.log(activityStream)
+        // ApiActions.receiveSinglePokemon(pokemon);
       }
     })
   }
-
-  // fetchSinglePokemon: function (id) {
-  //   $.ajax({
-  //     url: "api/pokemon/" + id,
-  //     success: function (pokemon) {
-  //       ApiActions.receiveSinglePokemon(pokemon);
-  //     }
-  //   })
-  // },
-  //
-  // createPokemon: function (pokemon, callback) {
-  //   $.ajax({
-  //     url: "api/pokemon",
-  //     method: "POST",
-  //     data: {pokemon: pokemon},
-  //     success: function (pokemon) {
-  //       ApiActions.receiveSinglePokemon(pokemon);
-  //       callback && callback(pokemon.id);
-  //     }
-  //   })
-  // }
 }
 
 module.exports = ApiUtil;
 
+// For console testing purposes only;
+// to be removed before app goes into production:
 window.ApiUtil = ApiUtil;
