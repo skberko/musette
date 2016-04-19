@@ -8,7 +8,10 @@ var ActivitiesIndex = require('./components/activities/activitiesIndex.jsx');
 var Musette = React.createClass({
   render: function () {
     return(
-      <div>Hello, String!</div>
+      <div>
+        Hello, String!
+        <ActivitiesIndex />
+      </div>
     );
   }
 });
