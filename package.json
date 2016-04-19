@@ -16,6 +16,7 @@
     "babel-preset-react": "^6.5.0",
     "flux": "^2.1.1",
     "react": "^15.0.1",
+    "react-addons-linked-state-mixin": "^15.0.1",
     "react-dom": "^15.0.1",
     "webpack": "^1.13.0"
   }
