@@ -7,8 +7,7 @@ gem 'omniauth-strava'
 # To conceal ENV variables in production; for docs, see:
 # see: http://railsapps.github.io/rails-environment-variables.html
 gem 'figaro'
-gem 'strava-api-v3'
-gem 'jbuilder', '~> 2.0'
+gem 'strava-api-v3', :path => "~/haxorz/strava-api-v3_skb_mods"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
