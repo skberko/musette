@@ -2,6 +2,8 @@ var React = require('react');
 var RouteStore = require('../../stores/routeStore.js');
 var ApiUtil = require('../../util/apiUtil.js');
 var RoutesIndexItem = require('./routesIndexItem.jsx');
+var ReactRouter = require('react-router');
+
 
 var RoutesIndex = React.createClass({
   getInitialState: function () {
