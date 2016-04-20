@@ -24,11 +24,14 @@ var RoutesIndex = React.createClass({
   render: function () {
     // debugger
     return(
-      <ul>
-        {this.state.routes.map(function (route) {
-          return <RoutesIndexItem key={route.id} route={route} />;
-        })}
-      </ul>
+      <div>
+        This is the routes index React component:
+        <ul>
+          {this.state.routes.map(function (route) {
+            return <RoutesIndexItem key={route.id} route={route} />;
+          })}
+        </ul>
+      </div>
     );
   }
 });

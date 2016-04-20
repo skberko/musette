@@ -8,9 +8,9 @@ class SessionsController < ApplicationController
     begin
       @user = User.from_omniauth(request.env['omniauth.auth'])
       session[:user_id] = @user.id
-      flash[:success] = "Welcome, #{@user.name}!"
+      # flash[:success] = "Welcome, #{@user.name}!"
     rescue
-      flash[:warning] = "We couldn't connect to your account!"
+      flash[:warning] = "There was an error connecting to your account!"
     end
     redirect_to root_path
   end

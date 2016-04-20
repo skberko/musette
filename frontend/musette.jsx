@@ -10,7 +10,7 @@ var Musette = React.createClass({
   render: function () {
     return(
       <div>
-        Hello, String!
+        ¡This is the musette.jsx entry point!
         <RoutesIndex />
       </div>
     );
