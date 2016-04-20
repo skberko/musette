@@ -1,4 +1,6 @@
 var ActivityActions = require('../actions/activityActions.js');
+var RouteActions = require('../actions/routeActions.js');
+
 
 var ApiUtil = {
   fetchAllActivities: function () {
@@ -11,11 +13,32 @@ var ApiUtil = {
     })
   },
 
-  fetchActivityStream: function (id) {
+  // fetchActivityStream: function (id) {
+  //   $.ajax({
+  //     url: "api/activity_streams/" + id,
+  //     success: function (activityStream) {
+  //       console.log(activityStream)
+  //       ActivityActions.receiveSingleActivity(activity);
+  //     }
+  //   })
+  // },
+
+  fetchAllRoutes: function () {
     $.ajax({
-      url: "api/activity_streams/" + id,
-      success: function (activityStream) {
-        console.log(activityStream)
+      url: "api/routes",
+      success: function (routes) {
+        console.log(routes)
+        RouteActions.receiveAllRoutes(routes);
+      }
+    })
+  },
+
+  fetchSingleRoute: function (id) {
+    $.ajax({
+      url: "api/routes/" + id,
+      success: function (route) {
+        console.log(route)
+        RouteActions.receiveSingleRoute(route)
         // ActivityActions.receiveSingleActivity(activity);
       }
     })

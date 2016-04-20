@@ -7,14 +7,14 @@ var ActivityActions = {
       actionType: ActivityConstants.ACTIVITIES_RECEIVED,
       activities: activities
     });
-  },
-
-  receiveSingleActivity: function (activity) {
-    Dispatcher.dispatch({
-      actionType: ActivityConstants.ACTIVITY_RECEIVED,
-      activity: activity
-    });
   }
+
+  // receiveSingleActivity: function (activity) {
+  //   Dispatcher.dispatch({
+  //     actionType: ActivityConstants.ACTIVITY_RECEIVED,
+  //     activity: activity
+  //   });
+  // }
 }
 
 module.exports = ActivityActions;
