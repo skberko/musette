@@ -1,7 +1,7 @@
 var React = require('react');
 var RouteStore = require('../../stores/routeStore.js');
 var ApiUtil = require('../../util/apiUtil.js');
-// var RouteIndexItem = require('./routeIndexItem.jsx');
+var RoutesIndexItem = require('./routesIndexItem.jsx');
 
 var RoutesIndex = React.createClass({
   getInitialState: function () {
@@ -22,21 +22,21 @@ var RoutesIndex = React.createClass({
   },
 
   render: function () {
+    // debugger
     return(
-      <div>{this.state.routes.length}</div>
+      <ul>
+        {this.state.routes.map(function (route) {
+          return <RoutesIndexItem key={route.id} route={route} />;
+        })}
+      </ul>
     );
   }
 });
 
 module.exports = RoutesIndex;
 
-
 // render: function () {
 //   return(
-//     <ul>
-//       {this.state.activities.map(function (activity) {
-//         return <ActivityIndexItem key={activity.id} activity={activity} />;
-//       })}
-//     </ul>
+//     <div>{this.state.routes.length}</div>
 //   );
 // }
