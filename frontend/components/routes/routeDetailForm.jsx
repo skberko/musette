@@ -1,10 +1,10 @@
 var React = require('react');
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
 
-var RouteForm = React.createClass({
+var RouteDetailForm = React.createClass({
   render: function () {
 
   }
 })
 
-module.exports = RouteForm;
+module.exports = RouteDetailForm;

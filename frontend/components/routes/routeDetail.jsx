@@ -1,8 +1,8 @@
 var React = require('react');
 var RouteDetailStore = require('../../stores/routeDetailStore.js');
-var RouteMap = require('./routeMap.jsx');
-var RouteForm = require('./routeForm.jsx');
-var RouteStopsList = require('./routeStopsList.jsx');
+var RouteDetailMap = require('./routeDetailMap.jsx');
+var RouteDetailForm = require('./routeDetailForm.jsx');
+var RouteDetailStopsList = require('./routeDetailStopsList.jsx');
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
 
