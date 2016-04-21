@@ -2,12 +2,6 @@ var React = require('react');
 
 var routeDetailMap = React.createClass({
   componentDidMount: function(){
-    var mapDOMNode = this.refs.map;
-    var mapOptions = {
-      center: {lat: 37.7758, lng: -122.435},
-      zoom: 13
-    };
-
     var decodedPolylineCoordPairs = google.maps.geometry.encoding.decodePath(this.props.routeDetail.route.map.polyline);
 
     var routePath = new google.maps.Polyline({
@@ -17,6 +11,15 @@ var routeDetailMap = React.createClass({
       strokeOpacity: 1.0,
       strokeWeight: 2
     });
+
+    var startLat = this.props.routeDetail.route_stream[0].data[0][0]
+    var startLng = this.props.routeDetail.route_stream[0].data[0][1]
+
+    var mapDOMNode = this.refs.map;
+    var mapOptions = {
+      center: {lat: startLat, lng: startLng},
+      zoom: 10
+    };
 
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
     routePath.setMap(this.map);
