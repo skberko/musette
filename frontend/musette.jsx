@@ -14,7 +14,6 @@ var Musette = React.createClass({
     // this.props.children passes props to all of the Route component's children
     return(
       <div>
-        ¡This is the musette.jsx entry point!
         <div>{this.props.children}</div>
       </div>
     );

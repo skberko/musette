@@ -7,7 +7,6 @@ var ApiUtil = {
     $.ajax({
       url: "api/activities",
       success: function (activities) {
-        console.log(activities)
         ActivityActions.receiveAllActivities(activities);
       }
     })
@@ -36,7 +35,6 @@ var ApiUtil = {
     $.ajax({
       url: "api/routes/" + id,
       success: function (routeDetail) {
-        console.log(routeDetail)
         RouteActions.receiveRouteDetail(routeDetail)
       }
     })
