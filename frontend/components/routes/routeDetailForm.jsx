@@ -2,9 +2,22 @@ var React = require('react');
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
 
 var RouteDetailForm = React.createClass({
+  getInitialState: function () {
+    return {
+      desiredStopCount: '',
+      offRouteTolerance: ''
+    };
+  },
+
+
+
   render: function () {
     return(
-      <div>I am the RouteDetailForm react component for {this.props.routeDetail.route.name}.</div>
+      <div>
+        <h4>Stops Preferences:</h4>
+        <form>
+        </form>
+      </div>
     );
   }
 })

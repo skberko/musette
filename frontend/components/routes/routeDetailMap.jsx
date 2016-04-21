@@ -12,6 +12,8 @@ var routeDetailMap = React.createClass({
       strokeWeight: 2
     });
 
+    // var midPointIdx = Math.floor(this.props.routeDetail.route_stream[0].data.length / 2)
+
     var startLat = this.props.routeDetail.route_stream[0].data[0][0]
     var startLng = this.props.routeDetail.route_stream[0].data[0][1]
 

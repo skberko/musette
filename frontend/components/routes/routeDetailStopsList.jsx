@@ -3,7 +3,7 @@ var React = require('react');
 var RouteDetailStopsList = React.createClass({
   render: function () {
     return(
-      <div>I am the RouteDetailStopsList react component for {this.props.routeDetail.route.name}.</div>
+      <h4>I am the RouteDetailStopsList react component for {this.props.routeDetail.route.name}.</h4>
     );
   }
 })
