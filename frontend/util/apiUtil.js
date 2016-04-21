@@ -27,19 +27,17 @@ var ApiUtil = {
     $.ajax({
       url: "api/routes",
       success: function (routes) {
-        console.log(routes)
         RouteActions.receiveAllRoutes(routes);
       }
     })
   },
 
-  fetchSingleRoute: function (id) {
+  fetchRouteDetail: function (id) {
     $.ajax({
       url: "api/routes/" + id,
-      success: function (route) {
-        console.log(route)
-        RouteActions.receiveSingleRoute(route)
-        // ActivityActions.receiveSingleActivity(activity);
+      success: function (routeDetail) {
+        console.log(routeDetail)
+        RouteActions.receiveRouteDetail(routeDetail)
       }
     })
   }

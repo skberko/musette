@@ -9,10 +9,10 @@ var RouteActions = {
     });
   },
 
-  receiveSingleRoute: function (route) {
+  receiveRouteDetail: function (routeDetail) {
     Dispatcher.dispatch({
-      actionType: RouteConstants.ROUTE_RECEIVED,
-      route: route
+      actionType: RouteConstants.ROUTE_DETAIL_RECEIVED,
+      routeDetail: routeDetail
     });
   }
 }

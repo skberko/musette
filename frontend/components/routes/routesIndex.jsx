@@ -26,7 +26,7 @@ var RoutesIndex = React.createClass({
   render: function () {
     return(
       <div>
-        This is the routes index React component:
+        RoutesIndex React Component:
         <ul>
           {this.state.routes.map(function (route) {
             return <RoutesIndexItem key={route.id} route={route} />;
