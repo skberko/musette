@@ -16,7 +16,6 @@ var RouteDetail = React.createClass({
   // will this result in unnecessary additional api call upon minor changes
   // to the RouteDetail component? something to think about
   _onChange: function () {
-    debugger
     this.setState({ routeDetail: RouteDetailStore.grabRouteDetail() });
   },
 
