@@ -11,10 +11,11 @@ var RouteDetail = require('./components/routes/routeDetail.jsx');
 
 var Musette = React.createClass({
   render: function () {
+    // this.props.children passes props to all of the Route component's children
     return(
       <div>
         ¡This is the musette.jsx entry point!
-        <RoutesIndex />
+        <div>{this.props.children}</div>
       </div>
     );
   }

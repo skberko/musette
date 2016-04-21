@@ -7,7 +7,8 @@ var Link = ReactRouter.Link;
 
 var RouteDetail = React.createClass({
   render: function () {
-
+    debugger
+    return (<div>this is a routeDetail view</div>);
   }
 })
 

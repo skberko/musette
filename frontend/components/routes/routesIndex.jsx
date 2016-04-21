@@ -24,7 +24,6 @@ var RoutesIndex = React.createClass({
   },
 
   render: function () {
-    // debugger
     return(
       <div>
         This is the routes index React component:

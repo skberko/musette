@@ -9,9 +9,13 @@ var RoutesIndexItem = React.createClass({
     return {};
   },
 
+  showDetail: function () {
+    this.history.pushState(null, '/routes/' + this.props.route.id, {});
+  },
+
   render: function () {
     return(
-      <li>
+      <li onClick={this.showDetail}>
         {this.props.route.name}
       </li>
     )
