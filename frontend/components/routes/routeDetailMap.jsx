@@ -7,12 +7,11 @@ var routeDetailMap = React.createClass({
       center: {lat: 37.7758, lng: -122.435},
       zoom: 13
     };
-    debugger
-    rename to var decodedPolylineCoordPairs
+
     var decodedPolylineCoordPairs = google.maps.geometry.encoding.decodePath(this.props.routeDetail.route.map.polyline);
 
     var routePath = new google.maps.Polyline({
-      path: routeDecodedPolyline,
+      path: decodedPolylineCoordPairs,
       geodesic: true,
       strokeColor: '#FF0000',
       strokeOpacity: 1.0,
