@@ -35,9 +35,13 @@ var RouteDetail = React.createClass({
     return (
       <div>
         <h2>Route: {this.state.routeDetail.route.name}</h2>
-        <RouteDetailMap className="route-detail-map" ref="map" routeDetail = {this.state.routeDetail}/>
+        <RouteDetailMap routeDetail = {this.state.routeDetail}/>
+        <br/>
         <RouteDetailForm routeDetail = {this.state.routeDetail}/>
+        <br/>
         <RouteDetailStopsList routeDetail = {this.state.routeDetail}/>
+        <br/>
+        <br/>
       </div>);
   }
 })
