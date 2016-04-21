@@ -1,8 +1,11 @@
 <body>
-
-  <div class="jumbotron">
-    <h1>Welcome to Musette!</h1>
-    <p>Authenticate via Strava to get started.</p>
-  </div>
   <div id="root"></div>
+
+  <% if !current_user %>
+    <div class="jumbotron">
+      <h1>Welcome to Musette!</h1>
+      <p>Authenticate via Strava to get started.</p>
+    </div>
+  <% end %>
+
 </body>
