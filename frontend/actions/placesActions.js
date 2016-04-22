@@ -1,7 +1,7 @@
 var Dispatcher = require('../dispatcher/dispatcher.js');
 var RouteConstants = require('../constants/placeConstants.js');
 
-var PlaceActions = {
+var PlacesActions = {
   // receiveAllRoutes: function (routes) {
   //   Dispatcher.dispatch({
   //     actionType: RouteConstants.ROUTES_RECEIVED,
@@ -17,5 +17,5 @@ var PlaceActions = {
   // }
 }
 
-module.exports = PlaceActions;
-window.RouteActions = PlaceActions;
+module.exports = PlacesActions;
+window.RouteActions = PlacesActions;

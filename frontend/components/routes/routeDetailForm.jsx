@@ -1,6 +1,7 @@
 var React = require('react');
 var Nouislider = require('react-nouislider');
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
+var PlacesUtil = require('../../util/placesUtil.js');
 
 var RouteDetailForm = React.createClass({
   mixins: [LinkedStateMixin],
@@ -24,14 +25,14 @@ var RouteDetailForm = React.createClass({
     // the following line in case stop count comes in as a string:
     var desiredStopCount = Number(this.state.desiredStopCount);
     var radiusToleranceMeters = this.convertMilesToMeters(this.state.radiusTolerance);
-    var googlePlacesSearchData = {
+    var googlePlacesSearchParameters = {
       desiredStopCount: desiredStopCount,
       radiusTolerance: radiusToleranceMeters,
       routeTotalDistance: this.props.routeDetail.route.distance,
       routeLatLngPairs: this.props.routeDetail.route_stream[0].data,
       routeDistances: this.props.routeDetail.route_stream[1].data
     };
-    debugger
+    PlacesUtil.searchForGooglePlaces(googlePlacesSearchParameters)
   },
 
   render: function () {
