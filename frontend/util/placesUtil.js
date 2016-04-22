@@ -1,42 +1,49 @@
 var PlacesActions = require('../actions/placesActions.js');
 
 var ApiUtil = {
-  fetchAllActivities: function () {
-    $.ajax({
-      url: "api/activities",
-      success: function (activities) {
-        ActivityActions.receiveAllActivities(activities);
-      }
-    })
+
+  createLatLngPairs: function () {
+
   },
 
-  // fetchActivityStream: function (id) {
-  //   $.ajax({
-  //     url: "api/activity_streams/" + id,
-  //     success: function (activityStream) {
-  //       console.log(activityStream)
-  //       ActivityActions.receiveSingleActivity(activity);
-  //     }
-  //   })
-  // },
+  searchForGooglePlaces: function (placesSearchParamObjects) {
+    var placesResults = [];
 
-  fetchAllRoutes: function () {
-    $.ajax({
-      url: "api/routes",
-      success: function (routes) {
-        RouteActions.receiveAllRoutes(routes);
-      }
-    })
+    placesSearchParamObjects.forEach(function (placesSearchParamObject) {
+      var placesSearchResult = googlePlacesSearch(placesSearchParamObject);
+      placesResults.push(placesSearchResult);
+    });
+
+    PlaceActions.receiveAllPlaces(placesResults);
   },
 
-  fetchRouteDetail: function (id) {
-    $.ajax({
-      url: "api/routes/" + id,
-      success: function (routeDetail) {
-        RouteActions.receiveRouteDetail(routeDetail)
-      }
-    })
+  googlePlacesSearch: function () {
+    var pyrmont = new google.maps.LatLng(-33.8665433,151.1956316);
+
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: pyrmont,
+      zoom: 15
+    });
+
+    var request = {
+      location: pyrmont,
+      radius: '500',
+      types: ['store']
+    };
+
+    service = new google.maps.places.PlacesService(map);
+    service.nearbySearch(request, callback);
   }
+
+
+  //pseudocode for searchForGooglePlaces:
+  // - create an empty placesResults array
+  // - take take an array of search param objects, each with a different
+  // center latlng value
+  // - iterate over each of the search param objects, hitting the google places
+  // api on each one, then pushing the results of this into the placesResults
+  // array
+  // - pass the array
 }
 
 module.exports = PlacesUtil;
