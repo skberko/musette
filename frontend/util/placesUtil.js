@@ -2,29 +2,23 @@ var PlacesActions = require('../actions/placesActions.js');
 
 var PlacesUtil = {
 
-  createLatLngPairs: function () {
-
-  },
-
-  searchForGooglePlaces: function (googlePlacesSearchParameters) {
+  searchForGooglePlaces: function (placesSearchObjects) {
+    // SKB: assuming this will eventually become a 2-d array of arrays of results
+    // associated with multiple searched places
     var placesSearchResults = [];
 
-    // create an array of latlng pairs to pass into google places search
-    // using a helper method
+    placesSearchRequests = this.createPlacesSearchRequests(placesSearchObjects);
+    placesSearchRequests.forEach(function (placesSearchRequest) {
+      // SKB: will the place be an Array of places returned by Google Places API?
+      var placesSearchResult = this.googlePlacesSearch(placesSearchRequest);
+      placesSearchResults.push(placesSearchResult);
+    }.bind(this));
 
-    // use a helper method to figure out which coord pairs to search:
-    placesSearchObjects = this.createPlacesSearchObjects(googlePlacesSearchParameters);
-    debugger
-    // placesSearchObjects.forEach(function (placesSearchObject) {
-    //   var placesSearchResult = googlePlacesSearch(placesSearchObject);
-    //   placesSearchResults.push(placesSearchResult);
-    // });
-    //
-    // PlaceActions.receiveAllPlaces(placesSearchResults);
+    PlacesActions.receiveAllPlaces(placesSearchResults);
   },
 
-  createPlacesSearchObjects: function (googlePlacesSearchParameters) {
-    placesSearchObjects = []
+  createPlacesSearchRequests: function (googlePlacesSearchParameters) {
+    placesSearchRequests = []
     var streamLength = googlePlacesSearchParameters.routeDistances.length
 
     for (i = googlePlacesSearchParameters.desiredStopCount; i > 0 ; i--) {
@@ -34,57 +28,42 @@ var PlacesUtil = {
       var streamIdx = Math.floor(streamLength / i) - 1;
       var lat = googlePlacesSearchParameters.routeLatLngPairs[streamIdx][0];
       var lng = googlePlacesSearchParameters.routeLatLngPairs[streamIdx][1];
-      var searchCenter = new google.maps.LatLng(lat, lng);
+      var searchLocation = new google.maps.LatLng(lat, lng);
 
-      var placesSearchObject = {
+      var placesSearchRequest = {
         radius: googlePlacesSearchParameters.radiusTolerance,
-        types: ['store', 'cafe', 'bicycle_shop'],
-        center: searchCenter
+        types: ['cafe', 'bicycle_shop'],
+        location: searchLocation
       };
 
-      placesSearchObjects.push(placesSearchObject)
+      placesSearchRequests.push(placesSearchRequest)
     };
-
-
-
-    return placesSearchObjects
+    console.log(placesSearchRequests)
+    return placesSearchRequests
   },
 
-  createPlacesSearchLatLngPairs: function () {
+  googlePlacesSearch: function (placesSearchRequest) {
+    var container = document.getElementById('route-detail-list');
+    var service = new google.maps.places.PlacesService(container);
 
+    placesSearchResult = service.nearbySearch(placesSearchRequest,
+      this.googlePlacesSearchCallback);
+
+    return placesSearchResult
   },
 
-  googlePlacesSearch: function () {
-    var pyrmont = new google.maps.LatLng(-33.8665433,151.1956316);
-
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: pyrmont,
-      zoom: 15
-    });
-
-    var request = {
-      location: pyrmont,
-      radius: '500',
-      types: ['store']
-    };
-
-    service = new google.maps.places.PlacesService(map);
-    service.nearbySearch(request, callback);
+  googlePlacesSearchCallback: function (results, status) {
+    debugger
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+      for (var i = 0; i < results.length; i++) {
+        // var place = results[i];
+        // createMarker(results[i]);
+        console.log(results[i]);
+      }
+    }
   }
 
-
-  //pseudocode for searchForGooglePlaces:
-  // - create an empty placesResults array
-  // - take take an array of search param objects, each with a different
-  // center latlng value
-  // - iterate over each of the search param objects, hitting the google places
-  // api on each one, then pushing the results of this into the placesResults
-  // array
-  // - pass the array
 }
 
 module.exports = PlacesUtil;
-
-// For console testing purposes only;
-// to be removed before app goes into production:
 window.PlacesUtil = PlacesUtil;

@@ -2,6 +2,11 @@ var Dispatcher = require('../dispatcher/dispatcher.js');
 var RouteConstants = require('../constants/placeConstants.js');
 
 var PlacesActions = {
+  receiveAllPlaces: function (placesSearchResults) {
+    
+  }
+
+
   // receiveAllRoutes: function (routes) {
   //   Dispatcher.dispatch({
   //     actionType: RouteConstants.ROUTES_RECEIVED,

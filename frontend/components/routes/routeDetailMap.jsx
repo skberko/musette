@@ -28,7 +28,6 @@ var routeDetailMap = React.createClass({
   },
 
   render: function () {
-    // debugger
     // the ref 'map' refers to this.map created in componentDidMount fcn above
     return(<div className="route-detail-map" ref="map">Map</div>);
   }
