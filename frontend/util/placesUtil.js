@@ -1,20 +1,57 @@
 var PlacesActions = require('../actions/placesActions.js');
 
-var ApiUtil = {
+var PlacesUtil = {
 
   createLatLngPairs: function () {
 
   },
 
-  searchForGooglePlaces: function (placesSearchParamObjects) {
-    var placesResults = [];
+  searchForGooglePlaces: function (googlePlacesSearchParameters) {
+    var placesSearchResults = [];
 
-    placesSearchParamObjects.forEach(function (placesSearchParamObject) {
-      var placesSearchResult = googlePlacesSearch(placesSearchParamObject);
-      placesResults.push(placesSearchResult);
-    });
+    // create an array of latlng pairs to pass into google places search
+    // using a helper method
 
-    PlaceActions.receiveAllPlaces(placesResults);
+    // use a helper method to figure out which coord pairs to search:
+    placesSearchObjects = this.createPlacesSearchObjects(googlePlacesSearchParameters);
+    debugger
+    // placesSearchObjects.forEach(function (placesSearchObject) {
+    //   var placesSearchResult = googlePlacesSearch(placesSearchObject);
+    //   placesSearchResults.push(placesSearchResult);
+    // });
+    //
+    // PlaceActions.receiveAllPlaces(placesSearchResults);
+  },
+
+  createPlacesSearchObjects: function (googlePlacesSearchParameters) {
+    placesSearchObjects = []
+    var streamLength = googlePlacesSearchParameters.routeDistances.length
+
+    for (i = googlePlacesSearchParameters.desiredStopCount; i > 0 ; i--) {
+      // subtract 1 from streamIdx for now to account for last idx position
+      // in the stream arrays; when actual search alg is written later, this
+      // may not be an issue:
+      var streamIdx = Math.floor(streamLength / i) - 1;
+      var lat = googlePlacesSearchParameters.routeLatLngPairs[streamIdx][0];
+      var lng = googlePlacesSearchParameters.routeLatLngPairs[streamIdx][1];
+      var searchCenter = new google.maps.LatLng(lat, lng);
+
+      var placesSearchObject = {
+        radius: googlePlacesSearchParameters.radiusTolerance,
+        types: ['store', 'cafe', 'bicycle_shop'],
+        center: searchCenter
+      };
+
+      placesSearchObjects.push(placesSearchObject)
+    };
+
+
+
+    return placesSearchObjects
+  },
+
+  createPlacesSearchLatLngPairs: function () {
+
   },
 
   googlePlacesSearch: function () {

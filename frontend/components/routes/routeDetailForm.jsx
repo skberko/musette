@@ -1,5 +1,5 @@
 var React = require('react');
-var Nouislider = require('react-nouislider');
+// var Nouislider = require('react-nouislider');
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
 var PlacesUtil = require('../../util/placesUtil.js');
 
