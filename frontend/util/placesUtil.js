@@ -32,7 +32,7 @@ var PlacesUtil = {
 
       var placesSearchRequest = {
         radius: googlePlacesSearchParameters.radiusTolerance,
-        type: ['bicycle_store'],
+        type: ['cafe'],
         location: searchLocation
       };
 
@@ -46,10 +46,8 @@ var PlacesUtil = {
     var container = document.getElementById('route-detail-list');
     var service = new google.maps.places.PlacesService(container);
 
-    placesSearchResult = service.nearbySearch(placesSearchRequest,
+    service.nearbySearch(placesSearchRequest,
       this.googlePlacesSearchCallback);
-
-    return placesSearchResult
   },
 
 // https://developers.google.com/maps/documentation/javascript/places#place_search_requests
