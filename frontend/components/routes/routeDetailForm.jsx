@@ -2,6 +2,9 @@ var React = require('react');
 // var Nouislider = require('react-nouislider');
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
 var PlacesUtil = require('../../util/placesUtil.js');
+// For callback to pass placesSearchResults to PlacesActions once Google Places
+// API call is done:
+var PlacesActions = require ('../../actions/placesActions.js');
 
 var RouteDetailForm = React.createClass({
   mixins: [LinkedStateMixin],
@@ -13,9 +16,6 @@ var RouteDetailForm = React.createClass({
     };
   },
 
-  // Strava's API and Google Places API handle distance in meters, but our
-  // user will be passing in radiusTolerance distance in miles, so need to
-  // convert before hitting
   convertMilesToMeters: function (distanceInMiles) {
     return Number(distanceInMiles) * 1609.344
   },

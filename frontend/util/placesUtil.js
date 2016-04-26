@@ -3,21 +3,21 @@ var placesSearchResults;
 
 var PlacesUtil = {
 
-  searchForGooglePlaces: function (placesSearchObjects) {
+  // Pass in PlacesActions.receiveAllPlaces(placesSearchResults) as a callback
+  // to ensure it doesn't receive placesSearchResults until placesSearchResults
+  // is fully populated:
+  // SKB: this solution not yet implemented; using setTimeout below as a stopgap
+  searchForGooglePlaces: function (placesSearchObject, callback) {
+    debugger;
     placesSearchResults = []
 
-    placesSearchRequests = this.createPlacesSearchRequests(placesSearchObjects);
-    debugger
+    placesSearchRequests = this.createPlacesSearchRequests(placesSearchObject);
     placesSearchRequests.forEach(function (placesSearchRequest) {
       this.googlePlacesSearch(placesSearchRequest);
     }.bind(this));
-    // !!!!!!!!!!!!!!!!!!
-    // SKB: need to set up callback or setTimeout so that PlacesActions doesn't receive
-    // placesSearchResults before placesSearchResults is fully populated.
-    // !!!!!!!!!!!!!!!!!!
-    // after that, set up binary search inside createPlacesSearchRequests so that
-    // initial search points are equally spaced apart!
-    PlacesActions.receiveAllPlaces(placesSearchResults);
+    // remove this setTimeout once I have a solution using a callback instead;
+    // could using a 'for' loop above solve this async problem? investigate.
+    setTimeout(function() { PlacesActions.receiveAllPlaces(placesSearchResults); }, 3000);
   },
 
   createPlacesSearchRequests: function (googlePlacesSearchParameters) {
@@ -35,13 +35,56 @@ var PlacesUtil = {
 
       var placesSearchRequest = {
         radius: googlePlacesSearchParameters.radiusTolerance,
-        type: ['cafe'],
+        // using a 'types' array to support multiple types in one api call is
+        // now deprecated and will cease to be supported entirely on Feb 16,
+        // 2017; must refactor to make multiple calls to multiple types
+        types: ['cafe', 'convenience_store', 'grocery_or_supermarket'],
         location: searchLocation
       };
 
       placesSearchRequests.push(placesSearchRequest)
     };
     return placesSearchRequests
+  },
+
+  bsearch: function (numbers, target) {
+    if (numbers.length === 0) {
+      return -1;
+    }
+
+    var probeIdx = Math.floor(numbers.length / 2);
+    var probe = numbers[probeIdx];
+    if (target === probe) {
+      return probeIdx;
+    } else if (target < probe) {
+      var left = numbers.slice(0, probeIdx);
+      return bsearch(left, target);
+    } else {
+      var right = numbers.slice(probeIdx + 1);
+      var subproblem = bsearch(right, target);
+
+      return subproblem === -1 ? -1 : subproblem + (probeIdx + 1);
+    }
+  },
+
+  // to find evenly-spaced lng-lat pair indices:
+  calculateLatLngPairIndices: function (distanceArray, desiredStopCount) {
+    equidistantStopDistances = this.calculateEquidistantStopDistances(
+        placesSearchObject.routeTotalDistance, desiredStopCount);
+
+
+  },
+
+  // e.g. returns [20, 40, 60, 80] for 100-mile route w/ 4 stops:
+  calculateEquidistantStopDistances: function (routeTotalDistance, desiredStopCount) {
+    var equidistantStopDistances = [];
+    var distanceBetweenStops =
+      routeTotalDistance / (desiredStopCount + 1);
+    for (var i = 1; i <= desiredStopCount; i++) {
+      equidistantStopDistances.push(i * distanceBetweenStops);
+    }
+
+    return equidistantStopDistances;
   },
 
   googlePlacesSearch: function (placesSearchRequest) {
@@ -57,9 +100,7 @@ var PlacesUtil = {
       placesSearchResults.push(results);
     } else {
       placesSearchResults.push([]);
-    }
-    console.log("inside google places callback:")
-    debugger
+    };
   }
 
 }
