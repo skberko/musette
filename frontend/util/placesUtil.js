@@ -1,14 +1,9 @@
 var PlacesActions = require('../actions/placesActions.js');
+var bSearch = require('binarysearch');
 var placesSearchResults;
 
 var PlacesUtil = {
-
-  // Pass in PlacesActions.receiveAllPlaces(placesSearchResults) as a callback
-  // to ensure it doesn't receive placesSearchResults until placesSearchResults
-  // is fully populated:
-  // SKB: this solution not yet implemented; using setTimeout below as a stopgap
-  searchForGooglePlaces: function (placesSearchObject, callback) {
-    debugger;
+  searchForGooglePlaces: function (placesSearchObject) {
     placesSearchResults = []
 
     placesSearchRequests = this.createPlacesSearchRequests(placesSearchObject);
@@ -16,63 +11,46 @@ var PlacesUtil = {
       this.googlePlacesSearch(placesSearchRequest);
     }.bind(this));
     // remove this setTimeout once I have a solution using a callback instead;
-    // could using a 'for' loop above solve this async problem? investigate.
+    // could using a 'for' loop above solve this async problem?
     setTimeout(function() { PlacesActions.receiveAllPlaces(placesSearchResults); }, 3000);
   },
 
   createPlacesSearchRequests: function (googlePlacesSearchParameters) {
     placesSearchRequests = []
-    var streamLength = googlePlacesSearchParameters.routeDistances.length
 
-    for (i = googlePlacesSearchParameters.desiredStopCount; i > 0 ; i--) {
-      // subtract 1 from streamIdx for now to account for last idx position
-      // in the stream arrays; when actual search alg is written later, this
-      // may not be an issue:
-      var streamIdx = Math.floor(streamLength / i) - 1;
-      var lat = googlePlacesSearchParameters.routeLatLngPairs[streamIdx][0];
-      var lng = googlePlacesSearchParameters.routeLatLngPairs[streamIdx][1];
+    var routeTotalDistance = googlePlacesSearchParameters.routeTotalDistance;
+    var distanceArray = googlePlacesSearchParameters.routeDistances;
+    var stopCount = googlePlacesSearchParameters.desiredStopCount;
+    var latLngPairIndices = this.calculateLatLngPairIndices(routeTotalDistance, distanceArray, stopCount);
+
+    debugger;
+    for (i = 0; i < latLngPairIndices.length; i++) {
+      var lat = googlePlacesSearchParameters.routeLatLngPairs[i][i];
+      var lng = googlePlacesSearchParameters.routeLatLngPairs[i][1];
       var searchLocation = new google.maps.LatLng(lat, lng);
 
       var placesSearchRequest = {
         radius: googlePlacesSearchParameters.radiusTolerance,
-        // using a 'types' array to support multiple types in one api call is
-        // now deprecated and will cease to be supported entirely on Feb 16,
-        // 2017; must refactor to make multiple calls to multiple types
+        // multiple 'types' search not supported starting 2/16/2017 - refactor:
         types: ['cafe', 'convenience_store', 'grocery_or_supermarket'],
         location: searchLocation
       };
 
       placesSearchRequests.push(placesSearchRequest)
     };
-    return placesSearchRequests
+
+    return placesSearchRequests;
   },
 
-  bsearch: function (numbers, target) {
-    if (numbers.length === 0) {
-      return -1;
-    }
-
-    var probeIdx = Math.floor(numbers.length / 2);
-    var probe = numbers[probeIdx];
-    if (target === probe) {
-      return probeIdx;
-    } else if (target < probe) {
-      var left = numbers.slice(0, probeIdx);
-      return bsearch(left, target);
-    } else {
-      var right = numbers.slice(probeIdx + 1);
-      var subproblem = bsearch(right, target);
-
-      return subproblem === -1 ? -1 : subproblem + (probeIdx + 1);
-    }
-  },
-
-  // to find evenly-spaced lng-lat pair indices:
-  calculateLatLngPairIndices: function (distanceArray, desiredStopCount) {
+  // to find relatively evenly-spaced lng-lat pair indices:
+  calculateLatLngPairIndices: function (routeTotalDistance, distanceArray, desiredStopCount) {
     equidistantStopDistances = this.calculateEquidistantStopDistances(
-        placesSearchObject.routeTotalDistance, desiredStopCount);
+        routeTotalDistance, desiredStopCount);
 
+    closestEquidistantStopIndices = this.findClosestEquidistantStopIndices(
+        distanceArray, equidistantStopDistances);
 
+    return closestEquidistantStopIndices;
   },
 
   // e.g. returns [20, 40, 60, 80] for 100-mile route w/ 4 stops:
@@ -85,6 +63,19 @@ var PlacesUtil = {
     }
 
     return equidistantStopDistances;
+  },
+
+  // uses closest match binary search to find stream indices of points at
+  // distances closest to those returned by calculateEquidistantStopDistances:
+  findClosestEquidistantStopIndices: function (distanceStream, equidistantStopDistances) {
+    var closestEquidistantStopIndices = [];
+
+    for (i = 0; i < equidistantStopDistances.length; i++) {
+      var match = bSearch.closest(distanceStream, equidistantStopDistances[i]);
+      closestEquidistantStopIndices.push(match);
+    }
+
+    return closestEquidistantStopIndices;
   },
 
   googlePlacesSearch: function (placesSearchRequest) {
