@@ -5,14 +5,12 @@ var placesSearchResults;
 var PlacesUtil = {
   searchForGooglePlaces: function (placesSearchObject) {
     placesSearchResults = []
+    desiredStopCount = placesSearchObject.desiredStopCount;
 
     placesSearchRequests = this.createPlacesSearchRequests(placesSearchObject);
     placesSearchRequests.forEach(function (placesSearchRequest) {
       this.googlePlacesSearch(placesSearchRequest);
     }.bind(this));
-    // remove this setTimeout once I have a solution using a callback instead;
-    // could using a 'for' loop above solve this async problem?
-    setTimeout(function() { PlacesActions.receiveAllPlaces(placesSearchResults); }, 3000);
   },
 
   createPlacesSearchRequests: function (googlePlacesSearchParameters) {
@@ -23,7 +21,6 @@ var PlacesUtil = {
     var stopCount = googlePlacesSearchParameters.desiredStopCount;
     var latLngPairIndices = this.calculateLatLngPairIndices(routeTotalDistance, distanceArray, stopCount);
 
-    debugger;
     for (i = 0; i < latLngPairIndices.length; i++) {
       var lat = googlePlacesSearchParameters.routeLatLngPairs[i][i];
       var lng = googlePlacesSearchParameters.routeLatLngPairs[i][1];
@@ -91,7 +88,11 @@ var PlacesUtil = {
       placesSearchResults.push(results);
     } else {
       placesSearchResults.push([]);
-    };
+    }
+
+    if (placesSearchResults.length === desiredStopCount) {
+      PlacesActions.receiveAllPlaces(placesSearchResults);
+    }
   }
 
 }
