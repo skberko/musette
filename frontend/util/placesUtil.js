@@ -1,17 +1,15 @@
 var PlacesActions = require('../actions/placesActions.js');
+var placesSearchResults;
 
 var PlacesUtil = {
 
   searchForGooglePlaces: function (placesSearchObjects) {
-    // SKB: assuming this will eventually become a 2-d array of arrays of results
-    // associated with multiple searched places
-    var placesSearchResults = [];
+    placesSearchResults = []
 
     placesSearchRequests = this.createPlacesSearchRequests(placesSearchObjects);
+
     placesSearchRequests.forEach(function (placesSearchRequest) {
-      // SKB: will the place be an Array of places returned by Google Places API?
-      var placesSearchResult = this.googlePlacesSearch(placesSearchRequest);
-      placesSearchResults.push(placesSearchResult);
+      this.googlePlacesSearch(placesSearchRequest);
     }.bind(this));
 
     PlacesActions.receiveAllPlaces(placesSearchResults);
@@ -32,34 +30,26 @@ var PlacesUtil = {
 
       var placesSearchRequest = {
         radius: googlePlacesSearchParameters.radiusTolerance,
-        type: ['cafe'],
+        type: ['store'],
         location: searchLocation
       };
 
       placesSearchRequests.push(placesSearchRequest)
     };
-    console.log(placesSearchRequests)
     return placesSearchRequests
   },
 
   googlePlacesSearch: function (placesSearchRequest) {
     var container = document.getElementById('route-detail-list');
     var service = new google.maps.places.PlacesService(container);
-
     service.nearbySearch(placesSearchRequest,
       this.googlePlacesSearchCallback);
   },
 
 // https://developers.google.com/maps/documentation/javascript/places#place_search_requests
   googlePlacesSearchCallback: function (results, status) {
-
-    debugger
     if (status == google.maps.places.PlacesServiceStatus.OK) {
-      for (var i = 0; i < results.length; i++) {
-        // var place = results[i];
-        // createMarker(results[i]);
-        console.log(results[i]);
-      }
+      placesSearchResults.push(results);
     }
   }
 
