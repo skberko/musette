@@ -12,6 +12,7 @@ var PlacesUtil = {
       this.googlePlacesSearch(placesSearchRequest);
     }.bind(this));
 
+    console.log(placesSearchResults)
     PlacesActions.receiveAllPlaces(placesSearchResults);
   },
 
@@ -30,7 +31,7 @@ var PlacesUtil = {
 
       var placesSearchRequest = {
         radius: googlePlacesSearchParameters.radiusTolerance,
-        type: ['store'],
+        type: ['cafe'],
         location: searchLocation
       };
 
@@ -50,7 +51,10 @@ var PlacesUtil = {
   googlePlacesSearchCallback: function (results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
       placesSearchResults.push(results);
+    } else {
+      placesSearchResults.push([]);
     }
+    console.log(placesSearchResults)
   }
 
 }
