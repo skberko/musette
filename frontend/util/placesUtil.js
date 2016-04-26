@@ -22,8 +22,8 @@ var PlacesUtil = {
     var latLngPairIndices = this.calculateLatLngPairIndices(routeTotalDistance, distanceArray, stopCount);
 
     for (i = 0; i < latLngPairIndices.length; i++) {
-      var lat = googlePlacesSearchParameters.routeLatLngPairs[i][i];
-      var lng = googlePlacesSearchParameters.routeLatLngPairs[i][1];
+      var lat = googlePlacesSearchParameters.routeLatLngPairs[latLngPairIndices[i]][0];
+      var lng = googlePlacesSearchParameters.routeLatLngPairs[latLngPairIndices[i]][1];
       var searchLocation = new google.maps.LatLng(lat, lng);
 
       var placesSearchRequest = {
