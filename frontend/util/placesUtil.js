@@ -7,12 +7,16 @@ var PlacesUtil = {
     placesSearchResults = []
 
     placesSearchRequests = this.createPlacesSearchRequests(placesSearchObjects);
-
+    debugger
     placesSearchRequests.forEach(function (placesSearchRequest) {
       this.googlePlacesSearch(placesSearchRequest);
     }.bind(this));
-
-    console.log(placesSearchResults)
+    // !!!!!!!!!!!!!!!!!!
+    // SKB: need to set up callback or setTimeout so that PlacesActions doesn't receive
+    // placesSearchResults before placesSearchResults is fully populated.
+    // !!!!!!!!!!!!!!!!!!
+    // after that, set up binary search inside createPlacesSearchRequests so that
+    // initial search points are equally spaced apart!
     PlacesActions.receiveAllPlaces(placesSearchResults);
   },
 
@@ -54,7 +58,8 @@ var PlacesUtil = {
     } else {
       placesSearchResults.push([]);
     }
-    console.log(placesSearchResults)
+    console.log("inside google places callback:")
+    debugger
   }
 
 }

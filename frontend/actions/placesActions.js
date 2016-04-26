@@ -3,7 +3,8 @@ var RouteConstants = require('../constants/placeConstants.js');
 
 var PlacesActions = {
   receiveAllPlaces: function (placesSearchResults) {
-    
+    console.log("this is from PlacesActions.receiveAllPlaces:")
+    console.log(placesSearchResults)
   }
 
 
