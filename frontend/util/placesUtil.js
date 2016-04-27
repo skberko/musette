@@ -84,8 +84,7 @@ var PlacesUtil = {
 
 // https://developers.google.com/maps/documentation/javascript/places#place_search_requests
   googlePlacesSearchCallback: function (results, status) {
-    console.log("now inside googlePlacesSearchCallback")
-    debugger
+
     console.log(status)
     if (status == google.maps.places.PlacesServiceStatus.OK) {
       placesSearchResults.push(results);
@@ -101,6 +100,21 @@ var PlacesUtil = {
     }
 
     if (placesSearchResults.length === desiredStopCount) {
+      // put placesSearchResults places into groups based on proximity to each stop,
+      // keeping in mind that I have access to placesSearchRequests, which has map items:
+
+      // 1: flatten placesSearchResults array
+      // 2: iterate over placesSearchResults items, comparing each to
+      // placesSearchRequests' map items and finding which map item is closest to which
+      // result item
+      // 3: when a closest match is determined, append that map item's placesSearchRequests
+      // array index number to the placesSearchResults item as a new object property,
+      // to be used later for sorting results in a React view component
+      // 4. push these newly updated results into array and shoot them over to
+      // the PlacesActions via PlacesActions.receiveAllPlaces
+
+      var flatPlacesSearchResults = [].concat.apply([], placesSearchResults)
+      debugger
       PlacesActions.receiveAllPlaces(placesSearchResults);
     }
   }
