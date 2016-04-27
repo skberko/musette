@@ -79,12 +79,11 @@ var PlacesUtil = {
     var container = document.getElementById('route-detail-list');
     var service = new google.maps.places.PlacesService(container);
     service.nearbySearch(placesSearchRequest,
-      this.googlePlacesSearchCallback);
+      this.googlePlacesSearchCallback.bind(this));
   },
 
 // https://developers.google.com/maps/documentation/javascript/places#place_search_requests
   googlePlacesSearchCallback: function (results, status) {
-
     console.log(status)
     if (status == google.maps.places.PlacesServiceStatus.OK) {
       placesSearchResults.push(results);
@@ -99,10 +98,12 @@ var PlacesUtil = {
       alert("There was a Google Places API error unrelated to the query limit!")
     }
 
+    // Send search results over to PlacesAction only after Google Places has
+    // searched for places at each stop geo point:
     if (placesSearchResults.length === desiredStopCount) {
+
       // put placesSearchResults places into groups based on proximity to each stop,
       // keeping in mind that I have access to placesSearchRequests, which has map items:
-
       var sortedPlacesSearchResults = [];
       for (var i = 0; i < desiredStopCount; i++) {
         sortedPlacesSearchResults.push([]);
@@ -120,18 +121,36 @@ var PlacesUtil = {
           var distance = google.maps.geometry.spherical.computeDistanceBetween(resultPoint, searchPoint);
 
           if (distance < radius) {
-            // SKB: still need to check for double entries on id;
-            // test case is 'MTB ride in marin headlands', 5 stops, 1 mile radius;
             sortedPlacesSearchResults[j].push(flatPlacesSearchResults[i]);
           }
         }
       }
 
-      debugger
-      PlacesActions.receiveAllPlaces(sortedPlacesSearchResults);
+      // ensure sortedPlacesSearchResults subarrays contain only unique elements
+      var uniqueSortedPlacesSearchResults = [];
+      for (var i = 0; i < sortedPlacesSearchResults.length; i++) {
+        uniqueSubarray = PlacesUtil.createNoDupsArray(sortedPlacesSearchResults[i]);
+        uniqueSortedPlacesSearchResults.push(uniqueSubarray);
+      }
 
-      // PlacesActions.receiveAllPlaces(placesSearchResults);
+      PlacesActions.receiveAllPlaces(uniqueSortedPlacesSearchResults);
     }
+  },
+
+  createNoDupsArray: function (array) {
+    var idCollection = {}
+    var newArray = []
+
+    for (var i = 0; i < array.length; i++) {
+      var currId = array[i].id
+
+      if (typeof idCollection[currId] === "undefined") {
+        idCollection[currId] = true;
+        newArray.push(array[i]);
+      }
+    }
+
+    return newArray;
   }
 
 }
