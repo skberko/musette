@@ -103,7 +103,7 @@ var PlacesUtil = {
       // put placesSearchResults places into groups based on proximity to each stop,
       // keeping in mind that I have access to placesSearchRequests, which has map items:
 
-      var sortedPlacesSearchResults = []
+      var sortedPlacesSearchResults = [];
       for (var i = 0; i < desiredStopCount; i++) {
         sortedPlacesSearchResults.push([]);
       }
