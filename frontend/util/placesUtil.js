@@ -8,9 +8,9 @@ var PlacesUtil = {
     desiredStopCount = placesSearchObject.desiredStopCount;
 
     placesSearchRequests = this.createPlacesSearchRequests(placesSearchObject);
-    placesSearchRequests.forEach(function (placesSearchRequest) {
-      this.googlePlacesSearch(placesSearchRequest);
-    }.bind(this));
+    for (var i=0; i < placesSearchRequests.length; i++) {
+      this.googlePlacesSearch(placesSearchRequests[i]);
+    }
   },
 
   createPlacesSearchRequests: function (googlePlacesSearchParameters) {
@@ -84,10 +84,19 @@ var PlacesUtil = {
 
 // https://developers.google.com/maps/documentation/javascript/places#place_search_requests
   googlePlacesSearchCallback: function (results, status) {
+    console.log(status)
+    // debugger
     if (status == google.maps.places.PlacesServiceStatus.OK) {
       placesSearchResults.push(results);
-    } else {
+    } else if (status == google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
       placesSearchResults.push([]);
+    } else if (status == google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT) {
+      alert(
+        "You have exceeded the Google Place API query limit! Please wait a moment, then try again."
+      );
+      placesSearchResults = [];
+    } else {
+      alert("There was some other error!")
     }
 
     if (placesSearchResults.length === desiredStopCount) {
