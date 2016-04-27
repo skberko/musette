@@ -156,4 +156,3 @@ var PlacesUtil = {
 }
 
 module.exports = PlacesUtil;
-window.PlacesUtil = PlacesUtil;
