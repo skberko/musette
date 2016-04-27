@@ -103,19 +103,34 @@ var PlacesUtil = {
       // put placesSearchResults places into groups based on proximity to each stop,
       // keeping in mind that I have access to placesSearchRequests, which has map items:
 
-      // 1: flatten placesSearchResults array
-      // 2: iterate over placesSearchResults items, comparing each to
-      // placesSearchRequests' map items and finding which map item is closest to which
-      // result item
-      // 3: when a closest match is determined, append that map item's placesSearchRequests
-      // array index number to the placesSearchResults item as a new object property,
-      // to be used later for sorting results in a React view component
-      // 4. push these newly updated results into array and shoot them over to
-      // the PlacesActions via PlacesActions.receiveAllPlaces
+      var sortedPlacesSearchResults = []
+      for (var i = 0; i < desiredStopCount; i++) {
+        sortedPlacesSearchResults.push([]);
+      }
 
+      // create flattened version of placesSearchResults:
       var flatPlacesSearchResults = [].concat.apply([], placesSearchResults)
+      var radius = placesSearchRequests[0].radius;
+
+      for (var i = 0; i < flatPlacesSearchResults.length; i++) {
+        var resultPoint = flatPlacesSearchResults[i].geometry.location;
+
+        for (var j = 0; j < placesSearchRequests.length; j++) {
+          var searchPoint = placesSearchRequests[j].location;
+          var distance = google.maps.geometry.spherical.computeDistanceBetween(resultPoint, searchPoint);
+
+          if (distance < radius) {
+            // SKB: still need to check for double entries;
+            // test case is 'MTB ride in marin headlands', 5 stops, 1 mile radius;
+            sortedPlacesSearchResults[j].push(flatPlacesSearchResults[i]);
+          }
+        }
+      }
+
       debugger
-      PlacesActions.receiveAllPlaces(placesSearchResults);
+      PlacesActions.receiveAllPlaces(sortedPlacesSearchResults);
+
+      // PlacesActions.receiveAllPlaces(placesSearchResults);
     }
   }
 
