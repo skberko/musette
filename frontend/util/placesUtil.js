@@ -120,7 +120,7 @@ var PlacesUtil = {
           var distance = google.maps.geometry.spherical.computeDistanceBetween(resultPoint, searchPoint);
 
           if (distance < radius) {
-            // SKB: still need to check for double entries;
+            // SKB: still need to check for double entries on id;
             // test case is 'MTB ride in marin headlands', 5 stops, 1 mile radius;
             sortedPlacesSearchResults[j].push(flatPlacesSearchResults[i]);
           }
