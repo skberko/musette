@@ -7,6 +7,7 @@ var RouteDetailStopsList = React.createClass({
   },
 
   render: function () {
+    debugger
     return(
       <h4 id="route-detail-list">I am the RouteDetailStopsList react component for {this.props.routeDetail.route.name}.</h4>
     );

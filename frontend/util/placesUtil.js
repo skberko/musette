@@ -26,11 +26,14 @@ var PlacesUtil = {
       var lng = googlePlacesSearchParameters.routeLatLngPairs[latLngPairIndices[i]][1];
       var searchLocation = new google.maps.LatLng(lat, lng);
 
+      // 'distance' below is to be used to pass stop distance
+      // info to React components, not Google:
       var placesSearchRequest = {
         radius: googlePlacesSearchParameters.radiusTolerance,
         // multiple 'types' search not supported starting 2/16/2017 - refactor:
         types: ['cafe', 'convenience_store', 'grocery_or_supermarket'],
-        location: searchLocation
+        location: searchLocation,
+        distance: googlePlacesSearchParameters.routeDistances[latLngPairIndices[i]]
       };
 
       placesSearchRequests.push(placesSearchRequest)
@@ -76,7 +79,7 @@ var PlacesUtil = {
   },
 
   googlePlacesSearch: function (placesSearchRequest) {
-    var container = document.getElementById('route-detail-list');
+    var container = document.getElementById('rdm');
     var service = new google.maps.places.PlacesService(container);
     service.nearbySearch(placesSearchRequest,
       this.googlePlacesSearchCallback.bind(this));
@@ -132,7 +135,23 @@ var PlacesUtil = {
         uniqueSortedPlacesSearchResults.push(uniqueSubarray);
       }
 
-      PlaceActions.receiveAllPlaces(uniqueSortedPlacesSearchResults);
+      // Convert sortedPlacesSearchResults, which contains only Arrays, to a
+      // collection of Objects, each of which can be used in the React views:
+      var objectResults = [];
+      for (var i = 0; i < uniqueSortedPlacesSearchResults.length; i++) {
+        var objectResult = {};
+        objectResult.stopGroupId = i;
+        objectResult.distanceIntoRoute = placesSearchRequests[i].distance;
+        objectResult.places = [];
+
+        for (var j = 0; j < uniqueSortedPlacesSearchResults[i].length; j++) {
+          objectResult.places.push(uniqueSortedPlacesSearchResults[i][j]);
+        }
+        objectResults.push(objectResult);
+      }
+
+      PlaceActions.receiveAllPlaces(objectResults)
+      // PlaceActions.receiveAllPlaces(uniqueSortedPlacesSearchResults);
     }
   },
 
