@@ -1,4 +1,4 @@
-var PlacesActions = require('../actions/placesActions.js');
+var PlaceActions = require('../actions/placeActions.js');
 var bSearch = require('binarysearch');
 var placesSearchResults;
 
@@ -84,7 +84,6 @@ var PlacesUtil = {
 
 // https://developers.google.com/maps/documentation/javascript/places#place_search_requests
   googlePlacesSearchCallback: function (results, status) {
-    console.log(status)
     if (status == google.maps.places.PlacesServiceStatus.OK) {
       placesSearchResults.push(results);
     } else if (status == google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
@@ -133,7 +132,7 @@ var PlacesUtil = {
         uniqueSortedPlacesSearchResults.push(uniqueSubarray);
       }
 
-      PlacesActions.receiveAllPlaces(uniqueSortedPlacesSearchResults);
+      PlaceActions.receiveAllPlaces(uniqueSortedPlacesSearchResults);
     }
   },
 

@@ -3,14 +3,7 @@ var Dispatcher = require('../dispatcher/dispatcher.js');
 var RouteConstants = require('../constants/routeConstants.js');
 var RouteDetailStore = new Store(Dispatcher);
 
-var routeDetail
-
-// var resetRoutes = function (routes) {
-//   _routes = {};
-//   routes.forEach(function (route) {
-//     _routes[route.id] = route;
-//   });
-// };
+var routeDetail;
 
 var resetRouteDetail = function (newRouteDetail) {
   routeDetail = newRouteDetail;
@@ -23,6 +16,7 @@ RouteDetailStore.grabRouteDetail = function () {
 RouteDetailStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
     case RouteConstants.ROUTE_DETAIL_RECEIVED:
+      console.log("RouteDetail has been received in the RouteDetailStore.")
       resetRouteDetail(payload.routeDetail);
       RouteDetailStore.__emitChange();
       break;

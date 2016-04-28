@@ -28,21 +28,14 @@ RouteStore.find = function (id) {
   return _routes[id];
 }
 
-// route_received option will be removed later, accounting for new
-// RouteDetailStore
 RouteStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
     case RouteConstants.ROUTES_RECEIVED:
+      console.log("Routes have been received in the RouteStore.")
       resetRoutes(payload.routes);
       RouteStore.__emitChange();
       break;
-    case RouteConstants.ROUTE_RECEIVED:
-      resetRoute(payload.route);
-      RouteStore.__emitChange();
-      // this needs to be rerouted to a different store, the RouteDetailStore,
-      // b/c it has a different type of additional info from the rest of the
-      // routes (streams)
-      break;
+
   }
 }
 
