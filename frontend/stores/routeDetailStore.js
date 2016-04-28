@@ -16,7 +16,6 @@ RouteDetailStore.grabRouteDetail = function () {
 RouteDetailStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
     case RouteConstants.ROUTE_DETAIL_RECEIVED:
-      console.log("RouteDetail has been received in the RouteDetailStore.")
       resetRouteDetail(payload.routeDetail);
       RouteDetailStore.__emitChange();
       break;

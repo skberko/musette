@@ -31,7 +31,6 @@ RouteStore.find = function (id) {
 RouteStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
     case RouteConstants.ROUTES_RECEIVED:
-      console.log("Routes have been received in the RouteStore.")
       resetRoutes(payload.routes);
       RouteStore.__emitChange();
       break;

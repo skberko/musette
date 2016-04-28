@@ -16,7 +16,6 @@ var ApiUtil = {
   //   $.ajax({
   //     url: "api/activity_streams/" + id,
   //     success: function (activityStream) {
-  //       console.log(activityStream)
   //       ActivityActions.receiveSingleActivity(activity);
   //     }
   //   })

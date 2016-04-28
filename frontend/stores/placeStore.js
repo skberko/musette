@@ -5,15 +5,15 @@ var PlaceStore = new Store(Dispatcher);
 
 var _places = {};
 
-// SKB: fix _places output so the later subarrays aren't populated
-// with results from the earlier ones!
 var resetPlaces = function (places) {
   _places = {};
+  console.log("now beginning PlaceStore.resetPlaces loop:")
   for (var i = 0; i < places.length; i++) {
     // the index value i represents the stop number of the group of places:
+    debugger
     _places[i] = places[i];
   }
-  console.log("PlaceStore has reset the places!");
+  console.log("PlaceStore has reset the places:");
   console.log(_places);
 }
 
