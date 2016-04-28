@@ -12,18 +12,19 @@ var routeDetailMap = React.createClass({
       strokeWeight: 2
     });
 
-    // var midPointIdx = Math.floor(this.props.routeDetail.route_stream[0].data.length / 2)
+    var coordinates = this.props.routeDetail.route_stream[0].data;
+    var bounds = new google.maps.LatLngBounds();
 
-    var startLat = this.props.routeDetail.route_stream[0].data[0][0]
-    var startLng = this.props.routeDetail.route_stream[0].data[0][1]
+    for (var i = 0; i < coordinates.length; i++) {
+      var latLng = new google.maps.LatLng(coordinates[i][0], coordinates[i][1])
+      bounds.extend(latLng);
+    }
 
     var mapDOMNode = this.refs.map;
-    var mapOptions = {
-      center: {lat: startLat, lng: startLng},
-      zoom: 10
-    };
 
-    this.map = new google.maps.Map(mapDOMNode, mapOptions);
+    // following can take an options mapOptions argument for great customization:
+    this.map = new google.maps.Map(mapDOMNode);
+    this.map.fitBounds(bounds)
     routePath.setMap(this.map);
   },
 
@@ -34,22 +35,3 @@ var routeDetailMap = React.createClass({
 })
 
 module.exports = routeDetailMap;
-// function initMap() {
-//   var map = new google.maps.Map(document.getElementById('map'), {
-//     zoom: 3,
-//     center: {lat: 0, lng: -180},
-//     mapTypeId: google.maps.MapTypeId.TERRAIN
-//   });
-//
-//   var flightPlanCoordinates = [
-//     {lat: 37.772, lng: -122.214},
-//     {lat: 21.291, lng: -157.821},
-//     {lat: -18.142, lng: 178.431},
-//     {lat: -27.467, lng: 153.027}
-//   ];
-//
-//
-//   flightPath.setMap(map);
-// }
-
-// <div>I am the RouteDetailMap react component for {this.props.routeDetail.route.name}.</div>
