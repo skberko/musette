@@ -10,7 +10,6 @@ var resetPlaces = function (places) {
   console.log("now beginning PlaceStore.resetPlaces loop:")
   for (var i = 0; i < places.length; i++) {
     // the index value i represents the stop number of the group of places:
-    debugger
     _places[i] = places[i];
   }
   console.log("PlaceStore has reset the places:");
