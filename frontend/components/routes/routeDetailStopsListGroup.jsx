@@ -7,7 +7,9 @@ var RouteDetailStopsListGroup = React.createClass({
 
   render: function () {
     return(
-      <h4 id="route-detail-list">I am the RouteDetailStopsList react component for {this.props.routeDetail.route.name}.</h4>
+      <li>I am the RouteDetailStopsListGroup for group: {this.props.stopGroupId + 1}</li>
     );
   }
 })
+
+module.exports = RouteDetailStopsListGroup;

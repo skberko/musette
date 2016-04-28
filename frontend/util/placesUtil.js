@@ -79,7 +79,7 @@ var PlacesUtil = {
   },
 
   googlePlacesSearch: function (placesSearchRequest) {
-    var container = document.getElementById('rdm');
+    var container = document.getElementById('maps-placeholder');
     var service = new google.maps.places.PlacesService(container);
     service.nearbySearch(placesSearchRequest,
       this.googlePlacesSearchCallback.bind(this));

@@ -3,8 +3,6 @@ var PlaceConstants = require('../constants/placeConstants.js');
 
 var PlaceActions = {
   receiveAllPlaces: function (places) {
-    console.log("place passed into PlaceActions.receiveAllPlaces");
-    console.log(places);
     Dispatcher.dispatch({
       actionType: PlaceConstants.PLACES_RECEIVED,
       places: places

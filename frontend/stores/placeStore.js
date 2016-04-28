@@ -7,7 +7,6 @@ var _places = {};
 
 var resetPlaces = function (places) {
   _places = {};
-  console.log("now beginning PlaceStore.resetPlaces loop:")
   for (var i = 0; i < places.length; i++) {
     // the index value i represents the stop number of the group of places:
     _places[i] = places[i];
