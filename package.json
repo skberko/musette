@@ -19,6 +19,7 @@
     "flux": "^2.1.1",
     "react": "^15.0.1",
     "react-addons-linked-state-mixin": "^15.0.1",
+    "react-bootstrap": "^0.29.3",
     "react-dom": "^15.0.1",
     "react-nouislider": "^1.10.0",
     "webpack": "^1.13.0"
