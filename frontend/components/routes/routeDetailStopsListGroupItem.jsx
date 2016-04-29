@@ -7,7 +7,7 @@ var RouteDetailStopsListGroupItem = React.createClass({
 
   render: function () {
     return(
-      <h6>I am a RouteDetailStopsListGroupItem component.</h6>
+      <li>I am a RouteDetailStopsListGroupItem item for {this.props.name}.</li>
     );
   }
 })

@@ -30,7 +30,8 @@ var RouteDetailStopsList = React.createClass({
                   stopGroupId={stopGroup.stopGroupId}
                   distance={stopGroup.distanceIntoRoute}
                   places={stopGroup.places}/>);
-        })}</ul>
+            })}
+        </ul>
       </div>
     );
   }

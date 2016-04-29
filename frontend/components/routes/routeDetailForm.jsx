@@ -37,13 +37,15 @@ var RouteDetailForm = React.createClass({
 
   render: function () {
     return(
-      <div>
+      <div className = "route-detail-map-form-container-item">
         <h4>Stops Preferences:</h4>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="stop_count">Number of Stops:</label>
           <input type="text" name="stop_count" valueLink={this.linkState("desiredStopCount")}/>
+          <br/>
           <label htmlFor="stop_count">Radius Tolerance:</label>
           <input type="text" name="radius_tolerance" valueLink={this.linkState("radiusTolerance")}/>
+          <br/>
           <input type="submit" value="Submit Preferences"/>
         </form>
       </div>

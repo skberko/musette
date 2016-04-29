@@ -18,7 +18,24 @@
 @import "bootstrap";
 @import 'bootstrap/theme';
 
+
+.route-detail-map-form-container {
+  text-align: center;
+}
+
+.route-detail-map-form-container-item {
+  display: inline-block;
+}
+
 .route-detail-map {
-  width: 80vw;
-  height: 500px;
+  width: 40vw;
+  height: 60vh;
+  margin-right: 5vw;
+}
+
+.route-detail-form {
+  width: 40vw;
+  height: 60vh;
+  margin-left: 5vw;
+  text-align: left;
 }

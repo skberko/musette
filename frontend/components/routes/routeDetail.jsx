@@ -8,13 +8,9 @@ var Link = ReactRouter.Link;
 
 var RouteDetail = React.createClass({
   getInitialState: function () {
-    // RouteDetailStore.grabRouteDetail() is currently returning nothing, so
-    // the RouteDetailStore must be empty
     return { routeDetail: RouteDetailStore.grabRouteDetail() };
   },
 
-  // will this result in unnecessary additional api call upon minor changes
-  // to the RouteDetail component? something to think about
   _onChange: function () {
     this.setState({ routeDetail: RouteDetailStore.grabRouteDetail() });
   },
@@ -35,10 +31,10 @@ var RouteDetail = React.createClass({
     return (
       <div>
         <h2>Route: {this.state.routeDetail.route.name}</h2>
-        <RouteDetailMap routeDetail = {this.state.routeDetail}/>
-        <br/>
-        <RouteDetailForm routeDetail = {this.state.routeDetail}/>
-        <br/>
+        <div className = "route-detail-map-form-container">
+          <RouteDetailMap routeDetail = {this.state.routeDetail}/>
+          <RouteDetailForm routeDetail = {this.state.routeDetail}/>
+        </div>
         <RouteDetailStopsList routeDetail = {this.state.routeDetail}/>
         <br/>
         <br/>
