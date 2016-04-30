@@ -1,9 +1,7 @@
 var React = require('react');
 var Grid = require("react-bootstrap").Grid;
 var Row = require("react-bootstrap").Row;
-// Col can be removed here?
 var Col = require("react-bootstrap").Col;
-var RouteDetailStopsListGroupItem = require('./routeDetailStopsListGroupItem.jsx')
 
 var RouteDetailStopsListGroup = React.createClass({
   getInitialState: function () {
@@ -22,9 +20,9 @@ var RouteDetailStopsListGroup = React.createClass({
       var businessTypes = stopGroupPlace.types.join([separator = ', '])
 
       return (<Row key={stopGroupPlace.id} className="show-grid">
-                <Col xs={6} md={4}>{stopGroupPlace.name}</Col>
-                <Col xs={6} md={4}>{stopGroupPlace.vicinity}</Col>
-                <Col xs={6} md={4}>{businessTypes}</Col>
+                <Col xs={4} md={4}>{stopGroupPlace.name}</Col>
+                <Col xs={4} md={4}>{stopGroupPlace.vicinity}</Col>
+                <Col xs={4} md={4}>{businessTypes}</Col>
               </Row>
       );
     });
@@ -40,12 +38,12 @@ var RouteDetailStopsListGroup = React.createClass({
 
     return(
       <div>
-        <h6>This stop is at mile: {distanceInMiles}</h6>
-        <Grid>
+        <h5>This stop is at mile: {distanceInMiles}</h5>
+        <Grid className="search-results-grid">
           <Row className="column-titles">
-            <Col xs={6} md={4}>Name</Col>
-            <Col xs={6} md={4}>Address</Col>
-            <Col xs={6} md={4}>Type of Business</Col>
+            <Col xs={4} md={4}>Name</Col>
+            <Col xs={4} md={4}>Address</Col>
+            <Col xs={4} md={4}>Type of Business</Col>
           </Row>
           {rows}
         </Grid>

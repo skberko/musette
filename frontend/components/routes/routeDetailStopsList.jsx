@@ -29,18 +29,15 @@ var RouteDetailStopsList = React.createClass({
       return (<Tab
                 key={index}
                 title={'Stop #' + titleNumber}
-                eventKey={index}
-              >
+                eventKey={index}>
                 <RouteDetailStopsListGroup
-                  stopGroup={stopGroup}
-                  />
+                  stopGroup={stopGroup}/>
               </Tab>
       );
     });
 
     return (
       <div>
-        <h4>Stops for {this.props.routeDetail.route.name}</h4>
         <Tabs id="stop-group-tabs">
           {tabs}
         </Tabs>

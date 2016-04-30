@@ -18,10 +18,6 @@
 @import "bootstrap";
 @import 'bootstrap/theme';
 
-#stop-group-tabs {
-  margin-bottom: 20vh;
-}
-
 .route-detail-map-form-container {
   text-align: center;
 }
@@ -43,6 +39,11 @@
   text-align: left;
 }
 
+.search-results-grid{
+  min-width: 965px;
+}
+
 .column-titles {
   margin-bottom: 10px;
+  font-weight: bold;
 }
