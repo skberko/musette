@@ -1,7 +1,12 @@
 var React = require('react');
+
+// delete once tables complete
 var Grid = require("react-bootstrap").Grid;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
+// delete once tables complete
+
+var Table = require("react-bootstrap").Table;
 
 var RouteDetailStopsListGroup = React.createClass({
   getInitialState: function () {
@@ -19,11 +24,11 @@ var RouteDetailStopsListGroup = React.createClass({
     var rows = this.props.stopGroup.places.map(function (stopGroupPlace) {
       var businessTypes = stopGroupPlace.types.join([separator = ', '])
 
-      return (<Row key={stopGroupPlace.id} className="show-grid">
-                <Col xs={4} md={4}>{stopGroupPlace.name}</Col>
-                <Col xs={4} md={4}>{stopGroupPlace.vicinity}</Col>
-                <Col xs={4} md={4}>{businessTypes}</Col>
-              </Row>
+      return (<tr key={stopGroupPlace.id}>
+                <td>{stopGroupPlace.name}</td>
+                <td>{stopGroupPlace.vicinity}</td>
+                <td>{businessTypes}</td>
+              </tr>
       );
     });
 
@@ -39,14 +44,18 @@ var RouteDetailStopsListGroup = React.createClass({
     return(
       <div>
         <h5>This stop is at mile: {distanceInMiles}</h5>
-        <Grid className="search-results-grid">
-          <Row className="column-titles">
-            <Col xs={4} md={4}>Name</Col>
-            <Col xs={4} md={4}>Address</Col>
-            <Col xs={4} md={4}>Type of Business</Col>
-          </Row>
-          {rows}
-        </Grid>
+        <Table striped bordered condensed hover>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Type of Business</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows}
+          </tbody>
+        </Table>
       </div>
     )
   }
