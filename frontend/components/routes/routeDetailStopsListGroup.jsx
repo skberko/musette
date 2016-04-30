@@ -1,5 +1,8 @@
 var React = require('react');
-// var Tab = require("react-bootstrap").Tab;
+var Grid = require("react-bootstrap").Grid;
+var Row = require("react-bootstrap").Row;
+// Col can be removed here?
+var Col = require("react-bootstrap").Col;
 var RouteDetailStopsListGroupItem = require('./routeDetailStopsListGroupItem.jsx')
 
 var RouteDetailStopsListGroup = React.createClass({
@@ -15,6 +18,13 @@ var RouteDetailStopsListGroup = React.createClass({
     var distanceInMiles =
       this.convertMetersToRoundedMiles(this.props.stopGroup.distanceIntoRoute);
 
+    var rows = this.props.stopGroup.places.map(function (stopGroupPlace) {
+      return (<Row key={stopGroupPlace.id} className="show-grid">
+                Details for place: {stopGroupPlace.name}
+              </Row>
+      );
+    });
+
 
     if (this.props.stopGroup.places.length === 0) {
       return(
@@ -26,12 +36,10 @@ var RouteDetailStopsListGroup = React.createClass({
 
     return(
       <div>
-        This stop is at mile: {distanceInMiles}
-        {this.props.stopGroup.places.map(function (stopGroupPlace, index) {
-          return(<RouteDetailStopsListGroupItem
-                key={index}
-                stopGroupPlace={stopGroupPlace}/>);
-        })}
+        <h6>This stop is at mile: {distanceInMiles}</h6>
+        <Grid>
+          {rows}
+        </Grid>
       </div>
     )
   }
