@@ -19,8 +19,12 @@ var RouteDetailStopsListGroup = React.createClass({
       this.convertMetersToRoundedMiles(this.props.stopGroup.distanceIntoRoute);
 
     var rows = this.props.stopGroup.places.map(function (stopGroupPlace) {
+      var businessTypes = stopGroupPlace.types.join([separator = ', '])
+
       return (<Row key={stopGroupPlace.id} className="show-grid">
-                Details for place: {stopGroupPlace.name}
+                <Col xs={6} md={4}>{stopGroupPlace.name}</Col>
+                <Col xs={6} md={4}>{stopGroupPlace.vicinity}</Col>
+                <Col xs={6} md={4}>{businessTypes}</Col>
               </Row>
       );
     });
@@ -38,6 +42,11 @@ var RouteDetailStopsListGroup = React.createClass({
       <div>
         <h6>This stop is at mile: {distanceInMiles}</h6>
         <Grid>
+          <Row className="column-titles">
+            <Col xs={6} md={4}>Name</Col>
+            <Col xs={6} md={4}>Address</Col>
+            <Col xs={6} md={4}>Type of Business</Col>
+          </Row>
           {rows}
         </Grid>
       </div>
