@@ -42,7 +42,6 @@ var RouteDetailStopsList = React.createClass({
       <div>
         <h4>Stops for {this.props.routeDetail.route.name}</h4>
         <Tabs id="stop-group-tabs">
-          {this.props.children}
           {tabs}
         </Tabs>
       </div>
