@@ -37,7 +37,7 @@ var RouteDetailStopsListGroup = React.createClass({
 
     return(
       <div>
-        <h5>This stop is {distanceInMiles} miles into your route.</h5>
+        <h5>These stops are roughly {distanceInMiles} miles into your route.</h5>
         <Table striped bordered condensed hover>
           <thead>
             <tr>

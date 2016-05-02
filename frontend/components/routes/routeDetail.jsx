@@ -40,14 +40,14 @@ var RouteDetail = React.createClass({
           </Col>
         </Row>
 
-        <Row>
+        <Row className="route-detail-mapform-row">
+          <Col md={4}>
+            <RouteDetailForm routeDetail = {this.state.routeDetail}/>
+          </Col>
           <Col md={8}>
             <RouteDetailMap routeDetail = {this.state.routeDetail}/>
           </Col>
 
-          <Col md={4}>
-            <RouteDetailForm routeDetail = {this.state.routeDetail}/>
-          </Col>
         </Row>
 
         <Row>
