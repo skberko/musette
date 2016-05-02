@@ -35,15 +35,16 @@ var RouteDetailStopsListGroup = React.createClass({
 
     if (this.props.stopGroup.places.length === 0) {
       return(
-        <div>This stop is at mile: {distanceInMiles}<br/>
-          Sorry, there do not appear to be any stopping points here.
+        <div>
+          <h5>Sorry, there do not appear to be any suitable stops at this point in your route.</h5>
+          <h5>Try expanding your search radius for better results!</h5>
         </div>
       )
     }
 
     return(
       <div>
-        <h5>This stop is at mile: {distanceInMiles}</h5>
+        <h5>This stop is {distanceInMiles} miles into your route.</h5>
         <Table striped bordered condensed hover>
           <thead>
             <tr>
