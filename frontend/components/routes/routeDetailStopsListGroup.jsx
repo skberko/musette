@@ -1,11 +1,4 @@
 var React = require('react');
-
-// delete once tables complete
-var Grid = require("react-bootstrap").Grid;
-var Row = require("react-bootstrap").Row;
-var Col = require("react-bootstrap").Col;
-// delete once tables complete
-
 var Table = require("react-bootstrap").Table;
 
 var RouteDetailStopsListGroup = React.createClass({

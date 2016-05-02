@@ -1,10 +1,14 @@
 var React = require('react');
 var RouteDetailStore = require('../../stores/routeDetailStore.js');
+var RouteDetailTitle = require('./routeDetailTitle.jsx');
 var RouteDetailMap = require('./routeDetailMap.jsx');
 var RouteDetailForm = require('./routeDetailForm.jsx');
 var RouteDetailStopsList = require('./routeDetailStopsList.jsx');
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
+var Grid = require("react-bootstrap").Grid;
+var Row = require("react-bootstrap").Row;
+var Col = require("react-bootstrap").Col;
 
 var RouteDetail = React.createClass({
   getInitialState: function () {
@@ -29,16 +33,29 @@ var RouteDetail = React.createClass({
     if (this.state.routeDetail === undefined) { return <div/>; }
 
     return (
-      <div>
-        <h3 className="route-title">Route: {this.state.routeDetail.route.name}</h3>
-        <div className = "route-detail-map-form-container">
-          <RouteDetailMap routeDetail = {this.state.routeDetail}/>
-          <RouteDetailForm routeDetail = {this.state.routeDetail}/>
-        </div>
-        <RouteDetailStopsList routeDetail = {this.state.routeDetail}/>
-        <br/>
-        <br/>
-      </div>);
+      <Grid>
+        <Row>
+          <Col md={12}>
+            <RouteDetailTitle routeName={this.state.routeDetail.route.name}/>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col md={8}>
+            <RouteDetailMap routeDetail = {this.state.routeDetail}/>
+          </Col>
+
+          <Col md={4}>
+            <RouteDetailForm routeDetail = {this.state.routeDetail}/>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col md={10} mdOffset={1}>
+            <RouteDetailStopsList routeDetail = {this.state.routeDetail}/>
+          </Col>
+        </Row>
+      </Grid>);
   }
 })
 
