@@ -1,18 +1,21 @@
 var React = require('react');
-// var Nouislider = require('react-nouislider');
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
 var PlacesUtil = require('../../util/placesUtil.js');
-// For callback to pass placesSearchResults to PlaceActions once Google Places
-// API call is done:
 var PlaceActions = require ('../../actions/placeActions.js');
+var FormGroup = require("react-bootstrap").FormGroup;
+var ControlLabel = require("react-bootstrap").ControlLabel;
+var FormControl = require("react-bootstrap").FormControl;
+var Button = require("react-bootstrap").Button;
+
+
 
 var RouteDetailForm = React.createClass({
   mixins: [LinkedStateMixin],
 
   getInitialState: function () {
     return {
-      desiredStopCount: 5,
-      radiusTolerance: ''
+      desiredStopCount: 3,
+      radiusTolerance: 2
     };
   },
 
@@ -37,21 +40,52 @@ var RouteDetailForm = React.createClass({
 
   render: function () {
     return(
-      <div>
+      <div className="route-detail-form-container">
         <h4>Stops Preferences:</h4>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="stop_count">Number of Stops:</label>
-          <input type="text" name="stop_count" valueLink={this.linkState("desiredStopCount")}/>
-          <br/>
-          <label htmlFor="stop_count">Radius Tolerance:</label>
-          <input type="text" name="radius_tolerance" valueLink={this.linkState("radiusTolerance")}/>
-          <br/>
-          <input type="submit" value="Submit Preferences"/>
+
+          <FormGroup controlId="formControlsSelect">
+            <ControlLabel>How many stops would you like to make?</ControlLabel>
+            <FormControl componentClass="select" placeholder="select" valueLink={this.linkState("desiredStopCount")}>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </FormControl>
+          </FormGroup>
+
+          <FormGroup controlId="formControlsSelect">
+            <ControlLabel>How many miles are you willing to go off-route to make a stop?</ControlLabel>
+            <FormControl componentClass="select" placeholder="select" valueLink={this.linkState("radiusTolerance")}>
+              <option value="0.5">Half a mile</option>
+              <option value="1">1 mile</option>
+              <option value="2">2 miles</option>
+              <option value="5">5 miles</option>
+              <option value="10">10 miles</option>
+            </FormControl>
+          </FormGroup>
+
+          <Button type="submit">
+            Find Stops
+          </Button>
+
         </form>
+
       </div>
     );
   }
 })
+
+// <form onSubmit={this.handleSubmit}>
+//   <label htmlFor="stop_count">Number of Stops:</label>
+//   <input type="text" name="stop_count" valueLink={this.linkState("desiredStopCount")}/>
+//   <br/>
+//   <label htmlFor="stop_count">Radius Tolerance:</label>
+//   <input type="text" name="radius_tolerance" valueLink={this.linkState("radiusTolerance")}/>
+//   <br/>
+//   <input type="submit" value="Submit Preferences"/>
+// </form>
 
 module.exports = RouteDetailForm;
 

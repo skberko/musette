@@ -36,15 +36,15 @@ var RouteDetail = React.createClass({
       <Grid>
         <Row>
           <Col md={12}>
-            <RouteDetailTitle routeName={this.state.routeDetail.route.name}/>
+            <RouteDetailTitle route={this.state.routeDetail.route}/>
           </Col>
         </Row>
 
         <Row className="route-detail-mapform-row">
-          <Col md={4}>
+          <Col md={3}>
             <RouteDetailForm routeDetail = {this.state.routeDetail}/>
           </Col>
-          <Col md={8}>
+          <Col md={9}>
             <RouteDetailMap routeDetail = {this.state.routeDetail}/>
           </Col>
 

@@ -30,7 +30,7 @@ var RouteDetailStopsListGroup = React.createClass({
       return(
         <div>
           <h5>Sorry, there do not appear to be any suitable stops at this point in your route.</h5>
-          <h5>Try expanding your search radius for better results!</h5>
+          <h5>Make sure to bring an extra banana or two, or try venturing further off-route for better results!</h5>
         </div>
       )
     }
