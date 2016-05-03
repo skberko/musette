@@ -17,11 +17,11 @@
     "babel-preset-react": "^6.5.0",
     "binarysearch": "^1.0.0",
     "flux": "^2.1.1",
+    "jquery": "^2.2.3",
     "react": "^15.0.1",
     "react-addons-linked-state-mixin": "^15.0.1",
     "react-bootstrap": "^0.29.3",
     "react-dom": "^15.0.1",
-    "react-nouislider": "^1.10.0",
     "webpack": "^1.13.0",
     "wnumb": "^1.0.2"
   }

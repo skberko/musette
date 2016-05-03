@@ -76,27 +76,4 @@ var RouteDetailForm = React.createClass({
   }
 })
 
-// <form onSubmit={this.handleSubmit}>
-//   <label htmlFor="stop_count">Number of Stops:</label>
-//   <input type="text" name="stop_count" valueLink={this.linkState("desiredStopCount")}/>
-//   <br/>
-//   <label htmlFor="stop_count">Radius Tolerance:</label>
-//   <input type="text" name="radius_tolerance" valueLink={this.linkState("radiusTolerance")}/>
-//   <br/>
-//   <input type="submit" value="Submit Preferences"/>
-// </form>
-
 module.exports = RouteDetailForm;
-
-// eventually use slider for stop count, radius tolerance, details here:
-// http://refreshless.com/nouislider/slider-read-write/
-// https://github.com/therealzac/Crashmate/blob/master/Crashmate/frontend/components/filterBar.jsx
-//
-// or maybe this:
-// https://www.npmjs.com/package/react-slider
-//
-// HTML5 slider option:
-// https://css-tricks.com/value-bubbles-for-range-inputs/
-// <input type="range" name="stop_count" min="0" max="5"/>
-// <label htmlFor="radius_tolerance">Radius Tolerance:</label>
-// <input type="range" name="radius_tolerance" min="0.2" max="2" step="0.2"/>

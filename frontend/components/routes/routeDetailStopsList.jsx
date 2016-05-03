@@ -3,10 +3,13 @@ var PlaceStore = require('../../stores/placeStore.js');
 var Tabs = require("react-bootstrap").Tabs;
 var Tab = require("react-bootstrap").Tab;
 var RouteDetailStopsListGroup = require('./routeDetailStopsListGroup.jsx');
+var PlaceGroupIdxUtil = require('../../util/placeGroupIdxUtil.js');
 
 var RouteDetailStopsList = React.createClass({
   getInitialState: function () {
-    return { places: PlaceStore.all() };
+    return {
+      places: PlaceStore.all()
+    };
   },
 
   _onChange: function () {
@@ -18,7 +21,12 @@ var RouteDetailStopsList = React.createClass({
   },
 
   componentWillUnmount: function () {
-    this.recipeListener.remove();
+    this.placeListener.remove();
+  },
+
+  handleTabClick: function (activeTabKey) {
+    // console.log("tab key being sent to PlaceGroupIdxUtil: " + activeTabKey);
+    PlaceGroupIdxUtil.fetchPlaceGroupIdx(activeTabKey);
   },
 
   render: function () {
@@ -38,7 +46,8 @@ var RouteDetailStopsList = React.createClass({
 
     return (
       <div>
-        <Tabs id="stop-group-tabs">
+        <Tabs id="stop-group-tabs"
+          onSelect={this.handleTabClick}>
           {tabs}
         </Tabs>
       </div>

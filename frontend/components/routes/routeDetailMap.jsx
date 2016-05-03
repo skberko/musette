@@ -1,15 +1,26 @@
 var React = require('react');
+var PlaceStore = require('../../stores/placeStore.js');
+var PlaceGroupIdxStore = require('../../stores/placeGroupIdxStore.js');
 
 var routeDetailMap = React.createClass({
-  getInitialState: function () {
-    return {
-      // should I define currentStop as null by default?
-      currentStop: 0,
-      currentStopPlaceMarkers: {}
-     };
+  // getInitialState: function () {
+  //   return {
+  //     desiredStopCount: 3,
+  //     radiusTolerance: 5,
+  //     placeGroupIdx: 0,
+  //     currentTabPlaces: []
+  //   };
+  // },
+
+  // equivalent to '_onChange':
+  setMarkers: function() {
+    console.log("now, we'll set some markers")
   },
 
   componentDidMount: function(){
+    // 'setMarkers' is equivalent to '_onChange':
+    this.placeGroupIdxListener = PlaceGroupIdxStore.addListener(this.setMarkers);
+
     var decodedPolylineCoordPairs = google.maps.geometry.encoding.decodePath(this.props.routeDetail.route.map.polyline);
 
     var routePath = new google.maps.Polyline({
@@ -40,7 +51,6 @@ var routeDetailMap = React.createClass({
 
     var startIcon = {
       url: 'http://res.cloudinary.com/dz5btfj9w/image/upload/c_scale,w_28/v1462234376/start_flag_298_288_thhem0.png',
-      // This marker is 20 pixels wide by 32 pixels high.
       // The origin for this image is (0, 0).
       origin: new google.maps.Point(0, 0),
       // The anchor for this image is the base of the flagpole at (0, 32).
@@ -49,7 +59,6 @@ var routeDetailMap = React.createClass({
 
     var finishIcon = {
       url: 'http://res.cloudinary.com/dz5btfj9w/image/upload/c_scale,h_40/v1462234772/red_flag_13_vu4rzt.png',
-      // This marker is 20 pixels wide by 32 pixels high.
       // The origin for this image is (0, 0).
       origin: new google.maps.Point(0, 0),
       // The anchor for this image is the base of the flagpole at (0, 32).
@@ -76,7 +85,12 @@ var routeDetailMap = React.createClass({
     routePath.setMap(this.map);
   },
 
+  componentWillUnmount: function () {
+    this.placeGroupIdxListener.remove();
+  },
+
   render: function () {
+
     // the ref 'map' refers to this.map created in componentDidMount fcn above
     return(<div className="route-detail-map" ref="map" id="rdm">Map</div>);
   }
