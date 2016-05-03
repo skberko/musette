@@ -1,6 +1,14 @@
 var React = require('react');
 
 var routeDetailMap = React.createClass({
+  getInitialState: function () {
+    return {
+      // should I define currentStop as null by default?
+      currentStop: 0,
+      currentStopPlaceMarkers: {}
+     };
+  },
+
   componentDidMount: function(){
     var decodedPolylineCoordPairs = google.maps.geometry.encoding.decodePath(this.props.routeDetail.route.map.polyline);
 
