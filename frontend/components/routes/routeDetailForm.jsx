@@ -15,7 +15,7 @@ var RouteDetailForm = React.createClass({
   getInitialState: function () {
     return {
       desiredStopCount: 3,
-      radiusTolerance: 2
+      radiusTolerance: 5
     };
   },
 
@@ -41,7 +41,6 @@ var RouteDetailForm = React.createClass({
   render: function () {
     return(
       <div className="route-detail-form-container">
-        <h4>Stops Preferences:</h4>
         <form onSubmit={this.handleSubmit}>
 
           <FormGroup controlId="formControlsSelect">
