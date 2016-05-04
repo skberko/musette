@@ -1,10 +1,3 @@
-PATH
-  remote: ~/haxorz/strava-api-v3_skb_mods
-  specs:
-    strava-api-v3 (0.5.0)
-      httmultiparty
-      multi_json
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -167,6 +160,9 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    strava-api-v3 (0.6.0)
+      httmultiparty
+      multi_json
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.2)
@@ -199,7 +195,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
-  strava-api-v3!
+  strava-api-v3
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
