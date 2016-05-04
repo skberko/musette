@@ -1,5 +1,7 @@
 var PlaceActions = require('../actions/placeActions.js');
 var bSearch = require('binarysearch');
+var PlaceGroupIdxUtil = require('./placeGroupIdxUtil.js');
+
 var placesSearchResults;
 
 var PlacesUtil = {
@@ -150,8 +152,11 @@ var PlacesUtil = {
         objectResults.push(objectResult);
       }
 
-      PlaceActions.receiveAllPlaces(objectResults)
-      // PlaceActions.receiveAllPlaces(uniqueSortedPlacesSearchResults);
+
+      PlaceActions.receiveAllPlaces(objectResults);
+
+      // allows markers to be set for first tab places after submitting search terms:
+      PlaceGroupIdxUtil.setInitialPlaceGroupIdx();
     }
   },
 

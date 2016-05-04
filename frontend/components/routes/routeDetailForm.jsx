@@ -7,11 +7,6 @@ var ControlLabel = require("react-bootstrap").ControlLabel;
 var FormControl = require("react-bootstrap").FormControl;
 var Button = require("react-bootstrap").Button;
 
-var PlaceGroupIdxUtil = require('../../util/placeGroupIdxUtil.js');
-
-
-
-
 var RouteDetailForm = React.createClass({
   mixins: [LinkedStateMixin],
 
@@ -38,10 +33,8 @@ var RouteDetailForm = React.createClass({
       routeLatLngPairs: this.props.routeDetail.route_stream[0].data,
       routeDistances: this.props.routeDetail.route_stream[1].data
     };
-    PlacesUtil.searchForGooglePlaces(googlePlacesSearchParameters)
     
-    // temporary solution - refactor!!!!:
-    setTimeout(PlaceGroupIdxUtil.setInitialPlaceGroupIdx, 500);
+    PlacesUtil.searchForGooglePlaces(googlePlacesSearchParameters)
   },
 
   render: function () {
