@@ -10,8 +10,6 @@ var _placeGroupIdx = 0;
 
 var resetPlaceGroupIdx = function (placeGroupIdx) {
   _placeGroupIdx = placeGroupIdx;
-  console.log("PlaceGroupIdx has reset the placeGroupIdx:");
-  console.log(_placeGroupIdx);
 }
 
 PlaceGroupIdxStore.placeGroupIdx = function () {

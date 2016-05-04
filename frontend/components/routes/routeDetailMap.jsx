@@ -3,21 +3,41 @@ var PlaceStore = require('../../stores/placeStore.js');
 var PlaceGroupIdxStore = require('../../stores/placeGroupIdxStore.js');
 
 var routeDetailMap = React.createClass({
-  // getInitialState: function () {
-  //   return {
-  //     desiredStopCount: 3,
-  //     radiusTolerance: 5,
-  //     placeGroupIdx: 0,
-  //     currentTabPlaces: []
-  //   };
-  // },
 
   // equivalent to '_onChange':
   setMarkers: function() {
-    console.log("now, we'll set some markers")
+    // clears the previous markers from the map:
+    this.markers.forEach(function (marker) {
+      marker.setMap(null);
+    });
+
+    var currentTabIdx = PlaceGroupIdxStore.placeGroupIdx();
+    // currentTabPlaces is an Array of place Objects:
+    // temporarily slice just the few handful of places for clarity's sake:
+    var currentTabPlaces = PlaceStore.all()[currentTabIdx].places.slice(0, 5);
+
+
+    // creates new markers from currentTabPlaces and pushes them into this.markers Array:
+    currentTabPlaces.forEach(this.createMarkerFromPlace);
+
+
+    // info on removing marker using marker.setMap(null):
+    // https://developers.google.com/maps/documentation/javascript/markers#remove
+  },
+
+  createMarkerFromPlace: function (place) {
+    var marker = new google.maps.Marker({
+      position: place.geometry.location,
+      map: this.map,
+      placeId: place.id,
+      title: place.name + ": " + place.vicinity
+    });
+
+    this.markers.push(marker);
   },
 
   componentDidMount: function(){
+    this.markers = [];
     // 'setMarkers' is equivalent to '_onChange':
     this.placeGroupIdxListener = PlaceGroupIdxStore.addListener(this.setMarkers);
 
