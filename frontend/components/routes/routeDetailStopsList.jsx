@@ -8,12 +8,13 @@ var PlaceGroupIdxUtil = require('../../util/placeGroupIdxUtil.js');
 var RouteDetailStopsList = React.createClass({
   getInitialState: function () {
     return {
-      places: PlaceStore.all()
+      places: PlaceStore.all(),
+      activeKey: 0
     };
   },
 
   _onChange: function () {
-    this.setState({ places: PlaceStore.all() });
+    this.setState({ places: PlaceStore.all(), activeKey: 0 });
   },
 
   componentDidMount: function () {
@@ -26,6 +27,7 @@ var RouteDetailStopsList = React.createClass({
 
   handleTabClick: function (activeTabKey) {
     // console.log("tab key being sent to PlaceGroupIdxUtil: " + activeTabKey);
+    this.setState({ activeKey: activeTabKey });
     PlaceGroupIdxUtil.fetchPlaceGroupIdx(activeTabKey);
   },
 
@@ -47,7 +49,8 @@ var RouteDetailStopsList = React.createClass({
     return (
       <div>
         <Tabs id="stop-group-tabs"
-          onSelect={this.handleTabClick}>
+          onSelect={this.handleTabClick}
+          activeKey={this.state.activeKey}>
           {tabs}
         </Tabs>
       </div>

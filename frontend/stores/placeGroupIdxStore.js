@@ -6,7 +6,11 @@ var PlaceGroupIdxStore = new Store(Dispatcher);
 // set to -1 for time being until a stop tab is selected;
 // should it be defaulted to 0 to auto-show first tab's stops upon rendering
 // search results from form?
-var _placeGroupIdx = 0;
+var _placeGroupIdx = -1;
+
+var setInitialPlaceGroupIdx = function () {
+  _placeGroupIdx = 0;
+}
 
 var resetPlaceGroupIdx = function (placeGroupIdx) {
   _placeGroupIdx = placeGroupIdx;
@@ -20,6 +24,10 @@ PlaceGroupIdxStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
     case PlaceGroupIdxConstants.PLACE_GROUP_IDX_RECEIVED:
       resetPlaceGroupIdx(payload.placeGroupIdx);
+      PlaceGroupIdxStore.__emitChange();
+      break;
+    case PlaceGroupIdxConstants.SET_INITIAL_PLACE_GROUP_IDX:
+      setInitialPlaceGroupIdx();
       PlaceGroupIdxStore.__emitChange();
       break;
   }

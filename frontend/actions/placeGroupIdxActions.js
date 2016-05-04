@@ -7,6 +7,13 @@ var PlaceGroupIdxActions = {
       actionType: PlaceGroupIdxConstants.PLACE_GROUP_IDX_RECEIVED,
       placeGroupIdx: placeGroupIdx
     });
+  },
+
+  setInitialPlaceGroupIdx: function () {
+    Dispatcher.dispatch({
+      actionType: PlaceGroupIdxConstants.SET_INITIAL_PLACE_GROUP_IDX,
+      placeGroupIdx: 0
+    })
   }
 }
 
