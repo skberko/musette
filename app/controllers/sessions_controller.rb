@@ -16,11 +16,13 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    # byebug
     if current_user
       session.delete(:user_id)
       # flash[:success] = "Sign out successful. See ya later!"
+      render :new
     end
-    redirect_to root_path
+    # redirect_to root_path
   end
 
 end

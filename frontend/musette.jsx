@@ -6,6 +6,7 @@ var IndexRoute = require('react-router').IndexRoute;
 var Dispatcher = require('./dispatcher/dispatcher')
 var RoutesIndex = require('./components/routes/routesIndex.jsx');
 var RouteDetail = require('./components/routes/routeDetail.jsx');
+var MusetteNavbar = require('./components/navbar/musetteNavbar.jsx');
 
 
 var Musette = React.createClass({
@@ -13,6 +14,7 @@ var Musette = React.createClass({
     // this.props.children passes props to all of the Route component's children
     return(
       <div>
+        <MusetteNavbar/>
         <div>{this.props.children}</div>
       </div>
     );
