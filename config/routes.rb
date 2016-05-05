@@ -5,8 +5,6 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   namespace :api, defaults: {format: :json} do
-    resources :activities, only: [:index]
-    resources :activity_streams, only: [:show]
     resources :routes, only: [:index, :show]
   end
 

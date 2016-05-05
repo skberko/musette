@@ -1,25 +1,7 @@
-var ActivityActions = require('../actions/activityActions.js');
 var RouteActions = require('../actions/routeActions.js');
 
 
 var ApiUtil = {
-  fetchAllActivities: function () {
-    $.ajax({
-      url: "api/activities",
-      success: function (activities) {
-        ActivityActions.receiveAllActivities(activities);
-      }
-    })
-  },
-
-  // fetchActivityStream: function (id) {
-  //   $.ajax({
-  //     url: "api/activity_streams/" + id,
-  //     success: function (activityStream) {
-  //       ActivityActions.receiveSingleActivity(activity);
-  //     }
-  //   })
-  // },
 
   fetchAllRoutes: function () {
     $.ajax({
