@@ -12,6 +12,9 @@
 !/log/.keep
 /tmp
 
+# TODO Comment out these rules if you are OK with secrets being uploaded to the repo
+!secrets.yml
+
 # Ignore application configuration
 /config/application.yml
 
