@@ -13,16 +13,11 @@ var routeDetailMap = React.createClass({
 
     var currentTabIdx = PlaceGroupIdxStore.placeGroupIdx();
     // currentTabPlaces is an Array of place Objects:
-    // temporarily slice just the few handful of places for clarity's sake:
-    var currentTabPlaces = PlaceStore.all()[currentTabIdx].places.slice(0, 5);
+    var currentTabPlaces = PlaceStore.all()[currentTabIdx].places;
 
 
     // creates new markers from currentTabPlaces and pushes them into this.markers Array:
     currentTabPlaces.forEach(this.createMarkerFromPlace);
-
-
-    // info on removing marker using marker.setMap(null):
-    // https://developers.google.com/maps/documentation/javascript/markers#remove
   },
 
   createMarkerFromPlace: function (place) {
