@@ -1,3 +1,19 @@
-<div>
-  <%= link_to 'Sign in via Strava', '/auth/strava' %>
-</div>
+<% if !current_user %>
+  <div class="jumbotron welcome-jumbotron">
+    <h1>Welcome to Musette!</h1>
+    <p>Authenticate via Strava to get started.</p>
+
+    <div>
+      <%= link_to '/auth/strava' do %>
+      <%= image_tag 'LogInWithStrava.png', width: 156, height: 32, alt: 'a face that is unnervingly happy'%>
+      <% end %>
+    </div>
+
+  </div>
+<% end %>
+
+
+
+<!-- <div>
+<%= link_to 'Sign in via Strava', '/auth/strava' %>
+</div> -->

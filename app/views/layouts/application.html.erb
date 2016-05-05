@@ -9,7 +9,7 @@
 </head>
 <body>
 
-  <nav class="navbar navbar-inverse">
+  <!-- <nav class="navbar navbar-inverse">
     <div class="container">
       <div class="navbar-header">
         <%= link_to 'Musette', root_path, class: 'navbar-brand' %>
@@ -17,7 +17,7 @@
       <div id="navbar">
         <% if current_user %>
           <ul class="nav navbar-nav pull-right">
-            <!-- <li><%= image_tag current_user.photo_url, alt: current_user.name %></li> -->
+            <li><%= image_tag current_user.photo_url, alt: current_user.name %></li>
             <li><%= link_to 'Log Out', session_path, method: :delete %></li>
           </ul>
         <% else %>
@@ -27,7 +27,7 @@
         <% end %>
       </div>
     </div>
-  </nav>
+  </nav> -->
 
   <div class="container">
     <% flash.each do |key, value| %>

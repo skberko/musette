@@ -17,7 +17,7 @@ var MusetteNavbar = React.createClass({
 
   render: function () {
     return(
-      <Navbar>
+      <Navbar className="musette-navbar">
         <Navbar.Header>
           <Navbar.Brand>
             <a href="#">Musette</a>

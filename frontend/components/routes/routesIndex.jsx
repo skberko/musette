@@ -43,6 +43,7 @@ var RoutesIndex = React.createClass({
     var rows = this.state.routes.map(function (route, index) {
 
       return (<tr
+                className="route-index-row"
                 key={route.id}
                 onClick={this.showDetail.bind(this, route.id)}
               >
@@ -53,7 +54,7 @@ var RoutesIndex = React.createClass({
     }.bind(this));
 
     return(
-      <div>
+      <div >
         <h3>Choose one of your Strava routes</h3>
 
         <Table striped bordered condensed hover>

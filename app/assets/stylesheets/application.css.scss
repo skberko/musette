@@ -18,7 +18,13 @@
 @import "bootstrap";
 @import 'bootstrap/theme';
 
+.welcome-jumbotron {
+  margin-top: 20vh;
+}
 
+.musette-navbar {
+  margin-top: 1.5vh;
+}
 
 .route-title {
   text-align: center;
@@ -40,12 +46,8 @@
   border-radius: 10px;
 }
 
-.route-detail-form-container {
-
-}
-
-.route-detail-form-button {
-  
+.route-index-row:hover {
+  cursor: pointer;
 }
 
 .column-titles {
