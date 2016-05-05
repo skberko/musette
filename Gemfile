@@ -8,8 +8,8 @@ gem 'omniauth-strava'
 # see: http://railsapps.github.io/rails-environment-variables.html
 gem 'figaro'
 gem 'strava-api-v3'
-gem 'newrelic_rpm'
-gem 'rails_12factor' # error feedback
+# gem 'newrelic_rpm'
+# gem 'rails_12factor' # error feedback
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
