@@ -23,7 +23,3 @@ RouteDetailStore.__onDispatch = function (payload) {
 }
 
 module.exports = RouteDetailStore;
-
-// For console testing purposes only;
-// to be removed before app goes into production:
-window.RouteDetailStore = RouteDetailStore

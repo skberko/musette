@@ -1,4 +1,5 @@
 var React = require('react');
+var PlaceStore = require('../../stores/placeStore.js');
 var Table = require("react-bootstrap").Table;
 
 var RouteDetailStopsListGroup = React.createClass({

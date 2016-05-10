@@ -27,55 +27,6 @@ Things you may want to cover:
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
 
-1. Sign user in using Strava API + OAuth
-
-	Keep in mind that localhost is white listed as a redirect_uri.
-
-2. Store the user’s unique Strava id
-
-3. Retrieve a list of the user’s routes using the user’s Strava id
-	Using the Strava npm package to console log these Route, this looks like:
-	strava.athlete.listRoutes({id:381269}, function(err,payload) {console.log(payload)});
-	(https://github.com/UnbounDev/node-strava-v3)
-
-	conversely:
-	Allow a user to input a route id manually (might be a helpful feature for testing before I get strava oauth login up and running)
-
-4. Display these Route in the React app, allowing user to select one
-
-	Here’s my test route, copied from JB:
-	https://www.strava.com/routes/4634590
-
-5. Once user has selected a Route, figure out how to retrieve that Route’s stream; unclear if the npm package has a way to do this natively, but it is definitely possible according to Strava’s API docs, so figure it out (may have to use raw AJAX request using the Route’s unique id):
-	e.g.
-	GET https://www.strava.com/api/v3/routes/:id/streams
-	https://strava.github.io/api/v3/streams/
-
-	This will return an array of unordered Stream objects
-	Will include distance, altitude, and latlng pairs
-
-6. Pass the latlng coordinate pairs into the Google Maps JavaScript API, drawing a line using the Polyline class, which (appears to) takes an Array ordered objects, each of which has lat and lng properties.
-
-	OR: SIMPLY COPY THE ASSOCIATED STRAVA ROUTE/STREAM POLYLINE TO GOOGLE MAPS (see link below)
-
-	See how to do this here:
-	https://developers.google.com/maps/documentation/javascript/shapes#polyline_add
-
-7. Place the Google Maps widget on my React site with the Polyline showing the Strava Route displayed on it
-
-8. Display user input fields for preference requests:
-	- Checkboxes for business type (cafe, grocery, gas/convenience, restaurant)
-	- Desired # of stops over the routes (perhaps set min=1, max=5)
-	- Tolerance for deviation from route (need to determine units for this)
-
-9. Math to determine business search results???
-
-	Use the Google Places API Javascript Library:
-	https://developers.google.com/places/javascript/
-
-10. Display search results in several ways:
-	- Markers on the embedded Google Maps widget (to be displayed in conjunction with Strava Route Polyline)
-	- List of search results with relevant info (hours, business type, price bracket, photo, etc), broken up by stop #, perhaps up to ~3 business per stop
 
 Resources:
 https://boards.greenhouse.io/strava/jobs/192704#.Vw1OvBMrKRs
@@ -90,18 +41,8 @@ https://github.com/stevenchanin/strava-api (Different Ruby gem for wrapping Stra
 http://fancypixel.github.io/blog/2015/01/28/react-plus-flux-backed-by-rails-api/ (React/rails-api Oauth)
 http://fredguest.com/2015/03/06/building-a-stateless-rails-api-with-react-and-twitter-oauth/ (React + stateless rails-api server with twitter oauth!!!)
 
-Example of an activity and its accompanying stream:
-http://www.strava.com/activities/537155681
-https://www.strava.com/activities/537155681/streams
-
 Google Maps & Strava APIs’ polylines may have the same encoding:
 http://gis.stackexchange.com/questions/83550/google-maps-decoded-polylines-showing-up-incorrectly
-
-Google project title: amiable webbing
-https://console.developers.google.com/apis/library?project=amiable-webbing-128022
-
-Google Places API Key:
-AIzaSyBS-sd3MnCwWUtx_jvAUQy8KuCBXU_CiSE
 
 Rails authentication with oauth demo!!!
 http://www.sitepoint.com/rails-authentication-oauth-2-0-omniauth/
@@ -112,6 +53,3 @@ to get twitter api to deal with localhost:3000 settings, had to set:
 -callback url: http://127.0.0.1:3000/auth/twitter/callback
 dealing with concealing env variables in rails using figaro:
 http://railsapps.github.io/rails-environment-variables.html
-
-billybobbycox@wahoo.com
-alph[0..6]

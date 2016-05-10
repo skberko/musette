@@ -16,7 +16,3 @@ var SessionUtil = {
 }
 
 module.exports = SessionUtil;
-
-// For console testing purposes only;
-// to be removed before app goes into production:
-window.SessionUtil = SessionUtil;

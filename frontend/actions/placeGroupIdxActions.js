@@ -18,4 +18,3 @@ var PlaceGroupIdxActions = {
 }
 
 module.exports = PlaceGroupIdxActions;
-window.PlaceActions = PlaceGroupIdxActions;

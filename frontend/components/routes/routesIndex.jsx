@@ -73,10 +73,4 @@ var RoutesIndex = React.createClass({
   }
 });
 
-// <ul>
-//   {this.state.routes.map(function (route) {
-//     return <RoutesIndexItem key={route.id} route={route} />;
-//   })}
-// </ul>
-
 module.exports = RoutesIndex;

@@ -23,7 +23,6 @@ var RouteDetailForm = React.createClass({
 
   handleSubmit: function (event) {
     event.preventDefault();
-    // the following line in case stop count comes in as a string:
     var desiredStopCount = Number(this.state.desiredStopCount);
     var radiusToleranceMeters = this.convertMilesToMeters(this.state.radiusTolerance);
     var googlePlacesSearchParameters = {

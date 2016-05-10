@@ -18,4 +18,3 @@ var RouteActions = {
 }
 
 module.exports = RouteActions;
-window.RouteActions = RouteActions;

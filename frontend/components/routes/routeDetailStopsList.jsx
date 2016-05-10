@@ -26,7 +26,6 @@ var RouteDetailStopsList = React.createClass({
   },
 
   handleTabClick: function (activeTabKey) {
-    // console.log("tab key being sent to PlaceGroupIdxUtil: " + activeTabKey);
     this.setState({ activeKey: activeTabKey });
     PlaceGroupIdxUtil.fetchPlaceGroupIdx(activeTabKey);
   },

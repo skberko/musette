@@ -1,5 +1,6 @@
 var React = require('react');
 var RouteDetailStore = require('../../stores/routeDetailStore.js');
+var ApiUtil = require('../../util/apiUtil.js');
 var RouteDetailTitle = require('./routeDetailTitle.jsx');
 var RouteDetailMap = require('./routeDetailMap.jsx');
 var RouteDetailForm = require('./routeDetailForm.jsx');

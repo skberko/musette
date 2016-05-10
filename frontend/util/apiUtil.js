@@ -23,7 +23,3 @@ var ApiUtil = {
 }
 
 module.exports = ApiUtil;
-
-// For console testing purposes only;
-// to be removed before app goes into production:
-window.ApiUtil = ApiUtil;

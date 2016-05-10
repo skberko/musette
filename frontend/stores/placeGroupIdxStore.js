@@ -3,9 +3,6 @@ var Dispatcher = require('../dispatcher/dispatcher.js');
 var PlaceGroupIdxConstants = require('../constants/placeGroupIdxConstants.js');
 var PlaceGroupIdxStore = new Store(Dispatcher);
 
-// set to -1 for time being until a stop tab is selected;
-// should it be defaulted to 0 to auto-show first tab's stops upon rendering
-// search results from form?
 var _placeGroupIdx = -1;
 
 var setInitialPlaceGroupIdx = function () {
@@ -34,4 +31,3 @@ PlaceGroupIdxStore.__onDispatch = function (payload) {
 }
 
 module.exports = PlaceGroupIdxStore;
-window.PlaceGroupIdxStore = PlaceGroupIdxStore;

@@ -39,7 +39,3 @@ RouteStore.__onDispatch = function (payload) {
 }
 
 module.exports = RouteStore;
-
-// For console testing purposes only;
-// to be removed before app goes into production:
-window.RouteStore = RouteStore

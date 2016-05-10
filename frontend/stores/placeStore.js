@@ -11,8 +11,6 @@ var resetPlaces = function (places) {
     // the index value i represents the stop number of the group of places:
     _places[i] = places[i];
   }
-  // console.log("PlaceStore has reset the places:");
-  // console.log(_places);
 }
 
 PlaceStore.all = function () {
@@ -36,4 +34,3 @@ PlaceStore.__onDispatch = function (payload) {
 }
 
 module.exports = PlaceStore;
-window.PlaceStore = PlaceStore;

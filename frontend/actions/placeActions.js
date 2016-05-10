@@ -11,4 +11,3 @@ var PlaceActions = {
 }
 
 module.exports = PlaceActions;
-window.PlaceActions = PlaceActions;

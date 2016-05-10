@@ -11,7 +11,6 @@ var NavItem = require("react-bootstrap").NavItem;
 var MusetteNavbar = React.createClass({
 
   logout: function () {
-    // debugger;
     SessionUtil.destroySession();
   },
 
