@@ -8,8 +8,8 @@ var PlaceGroupIdxUtil = require('../../util/placeGroupIdxUtil.js');
 var RouteDetailStopsList = React.createClass({
   getInitialState: function () {
     return {
-      places: PlaceStore.all(),
-      activeKey: 0
+      places: undefined,
+      activeKey: undefined
     };
   },
 
@@ -32,6 +32,8 @@ var RouteDetailStopsList = React.createClass({
   },
 
   render: function () {
+
+    if (this.state.places === undefined) { return <div/>; }
 
     var tabs = this.state.places.map(function (stopGroup, index) {
       var titleNumber = index + 1

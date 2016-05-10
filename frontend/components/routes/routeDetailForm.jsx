@@ -13,7 +13,7 @@ var RouteDetailForm = React.createClass({
   getInitialState: function () {
     return {
       desiredStopCount: 3,
-      radiusTolerance: 5
+      radiusTolerance: 2
     };
   },
 
@@ -33,7 +33,7 @@ var RouteDetailForm = React.createClass({
       routeLatLngPairs: this.props.routeDetail.route_stream[0].data,
       routeDistances: this.props.routeDetail.route_stream[1].data
     };
-    
+
     PlacesUtil.searchForGooglePlaces(googlePlacesSearchParameters)
   },
 

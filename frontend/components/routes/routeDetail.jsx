@@ -11,8 +11,11 @@ var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 
 var RouteDetail = React.createClass({
+  // Hack-y solution: set initial this.state.routeDetail = undefined to avoid
+  // picking up previous rendered RouteDetail component's map and info;
+  // There are still the old RouteDetail's stops, however, so hack those away.
   getInitialState: function () {
-    return { routeDetail: RouteDetailStore.grabRouteDetail() };
+    return { routeDetail: undefined };
   },
 
   _onChange: function () {
