@@ -10,7 +10,7 @@ var RoutesIndex = React.createClass({
   mixins: [History],
 
   getInitialState: function () {
-    return { routes: RouteStore.all() };
+    return { routes: 'initial' };
   },
 
   _onChange: function () {
@@ -36,8 +36,22 @@ var RoutesIndex = React.createClass({
 
   render: function () {
 
-    if (this.state.routes.length === 0) {
+    if (this.state.routes === 'initial') {
       return(<div/>);
+    }
+
+    if (this.state.routes.length === 0) {
+      return(
+        <div>
+          <p>
+            You don&#39;t have any Strava routes! How about clicking <a href="https://www.strava.com/routes">here</a> to create one?
+          </p>
+          <br/>
+          <p>
+            Too much effort? Create a route from an existing Strava activity <a href="https://support.strava.com/hc/en-us/articles/216942367-Create-a-new-Route-from-an-existing-Route-Duplicate-">like this</a>!
+          </p>
+        </div>
+      );
     }
 
     var rows = this.state.routes.map(function (route, index) {
