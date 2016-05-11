@@ -11,11 +11,11 @@ var RouteDetailTitle = React.createClass({
 
     return(
       <div className="route-title">
-        <h3>
-          Route: {this.props.route.name}
-        </h3>
+        <h2>
+          {this.props.route.name}
+        </h2>
 
-        <p>
+        <h5>
           <span className="route-title-stat-name">
             Distance:&nbsp;
           </span>
@@ -24,7 +24,7 @@ var RouteDetailTitle = React.createClass({
             Elevation Gain:&nbsp;
           </span>
           {elevationInFeet} feet
-        </p>
+        </h5>
       </div>
     );
   }

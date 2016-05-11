@@ -52,6 +52,8 @@ var RouteDetailForm = React.createClass({
             </FormControl>
           </FormGroup>
 
+          <br/>
+
           <FormGroup controlId="formControlsSelect">
             <ControlLabel>How many miles are you willing to go off-route to make a stop?</ControlLabel>
             <FormControl componentClass="select" placeholder="select" valueLink={this.linkState("radiusTolerance")}>
@@ -62,6 +64,8 @@ var RouteDetailForm = React.createClass({
               <option value="10">10 miles</option>
             </FormControl>
           </FormGroup>
+
+          <br/>
 
           <Button type="submit">
             Find Stops
