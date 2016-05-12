@@ -16,6 +16,10 @@ Try Musette with this Strava demo account:
 - email: jimmy@tester.com
 - password: jimmytester
 
+Here is a basic view of the search functionality of the app:
+
+![Route View Screenshot](http://res.cloudinary.com/dz5btfj9w/image/upload/c_scale,w_600/v1463030235/musette_place_tabs_screenshot_g3oxnj.png)
+
 ## Technologies Used
 
 Musette integrates with the following APIs:
