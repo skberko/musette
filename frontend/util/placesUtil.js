@@ -6,7 +6,7 @@ var placesSearchResults;
 
 var PlacesUtil = {
   searchForGooglePlaces: function (placesSearchObject) {
-    placesSearchResults = {}
+    placesSearchResults = []
     desiredStopCount = placesSearchObject.desiredStopCount;
 
     placesSearchRequests = this.createPlacesSearchRequests(placesSearchObject);
@@ -80,102 +80,101 @@ var PlacesUtil = {
     return closestEquidistantStopIndices;
   },
 
-  googlePlacesSearch: function (placesSearchRequest, placeGroupIdx) {
+  googlePlacesSearch: function (placesSearchRequest) {
     var container = document.getElementById('maps-placeholder');
     var service = new google.maps.places.PlacesService(container);
     service.nearbySearch(placesSearchRequest,
-      this.googlePlacesSearchCallback.bind(this, placeGroupIdx));
+      this.googlePlacesSearchCallback.bind(this));
   },
 
 // https://developers.google.com/maps/documentation/javascript/places#place_search_requests
-  googlePlacesSearchCallback: function (results, status, placeGroupIdx) {
+  googlePlacesSearchCallback: function (results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
-      placesSearchResults[placeGroupIdx] = (results);
+      placesSearchResults.push(results);
     } else if (status == google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
-      placesSearchResults[placeGroupIdx] = [];
+      placesSearchResults.push([]);
     } else if (status == google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT) {
       alert(
         "You have exceeded the Google Place API query limit! Please wait a moment, then try again."
       );
-      placesSearchResults = {};
+      placesSearchResults = [];
     } else {
       alert("There was a Google Places API error unrelated to the query limit!")
     }
 
     // Send search results over to PlacesAction only after Google Places has
     // searched for places at each stop geo point:
-    if (Object.keys(placesSearchResults).length === desiredStopCount) {
-      console.log(placesSearchResults);
+    if (placesSearchResults.length === desiredStopCount) {
 
-    //   // put placesSearchResults places into groups based on proximity to each stop,
-    //   // keeping in mind that I have access to placesSearchRequests, which has map items:
-    //   var sortedPlacesSearchResults = [];
-    //   for (var i = 0; i < desiredStopCount; i++) {
-    //     sortedPlacesSearchResults.push([]);
-    //   }
-    //
-    //   // create flattened version of placesSearchResults:
-    //   var flatPlacesSearchResults = [].concat.apply([], placesSearchResults)
-    //   var radius = placesSearchRequests[0].radius;
-    //
-    //   for (var i = 0; i < flatPlacesSearchResults.length; i++) {
-    //     var resultPoint = flatPlacesSearchResults[i].geometry.location;
-    //
-    //     for (var j = 0; j < placesSearchRequests.length; j++) {
-    //       var searchPoint = placesSearchRequests[j].location;
-    //       var distance = google.maps.geometry.spherical.computeDistanceBetween(resultPoint, searchPoint);
-    //
-    //       if (distance < radius) {
-    //         sortedPlacesSearchResults[j].push(flatPlacesSearchResults[i]);
-    //       }
-    //     }
-    //   }
-    //
-    //   // ensure sortedPlacesSearchResults subarrays contain only unique elements
-    //   var uniqueSortedPlacesSearchResults = [];
-    //   for (var i = 0; i < sortedPlacesSearchResults.length; i++) {
-    //     uniqueSubarray = PlacesUtil.createNoDupsArray(sortedPlacesSearchResults[i]);
-    //     uniqueSortedPlacesSearchResults.push(uniqueSubarray);
-    //   }
-    //
-    //   // Convert sortedPlacesSearchResults, which contains only Arrays, to a
-    //   // collection of Objects, each of which can be used in the React views:
-    //   var objectResults = [];
-    //   for (var i = 0; i < uniqueSortedPlacesSearchResults.length; i++) {
-    //     var objectResult = {};
-    //     objectResult.stopGroupId = i;
-    //     objectResult.distanceIntoRoute = placesSearchRequests[i].distance;
-    //     objectResult.places = [];
-    //
-    //     for (var j = 0; j < uniqueSortedPlacesSearchResults[i].length; j++) {
-    //       objectResult.places.push(uniqueSortedPlacesSearchResults[i][j]);
-    //     }
-    //     objectResults.push(objectResult);
-    //   }
-    //
-    //
-    //   PlaceActions.receiveAllPlaces(objectResults);
-    //
-    //   // allows markers to be set for first tab places after submitting search terms:
-    //   PlaceGroupIdxUtil.setInitialPlaceGroupIdx();
+      // put placesSearchResults places into groups based on proximity to each stop,
+      // keeping in mind that I have access to placesSearchRequests, which has map items:
+      var sortedPlacesSearchResults = [];
+      for (var i = 0; i < desiredStopCount; i++) {
+        sortedPlacesSearchResults.push([]);
+      }
+
+      // create flattened version of placesSearchResults:
+      var flatPlacesSearchResults = [].concat.apply([], placesSearchResults)
+      var radius = placesSearchRequests[0].radius;
+
+      for (var i = 0; i < flatPlacesSearchResults.length; i++) {
+        var resultPoint = flatPlacesSearchResults[i].geometry.location;
+
+        for (var j = 0; j < placesSearchRequests.length; j++) {
+          var searchPoint = placesSearchRequests[j].location;
+          var distance = google.maps.geometry.spherical.computeDistanceBetween(resultPoint, searchPoint);
+
+          if (distance < radius) {
+            sortedPlacesSearchResults[j].push(flatPlacesSearchResults[i]);
+          }
+        }
+      }
+
+      // ensure sortedPlacesSearchResults subarrays contain only unique elements
+      var uniqueSortedPlacesSearchResults = [];
+      for (var i = 0; i < sortedPlacesSearchResults.length; i++) {
+        uniqueSubarray = PlacesUtil.createNoDupsArray(sortedPlacesSearchResults[i]);
+        uniqueSortedPlacesSearchResults.push(uniqueSubarray);
+      }
+
+      // Convert sortedPlacesSearchResults, which contains only Arrays, to a
+      // collection of Objects, each of which can be used in the React views:
+      var objectResults = [];
+      for (var i = 0; i < uniqueSortedPlacesSearchResults.length; i++) {
+        var objectResult = {};
+        objectResult.stopGroupId = i;
+        objectResult.distanceIntoRoute = placesSearchRequests[i].distance;
+        objectResult.places = [];
+
+        for (var j = 0; j < uniqueSortedPlacesSearchResults[i].length; j++) {
+          objectResult.places.push(uniqueSortedPlacesSearchResults[i][j]);
+        }
+        objectResults.push(objectResult);
+      }
+
+
+      PlaceActions.receiveAllPlaces(objectResults);
+
+      // allows markers to be set for first tab places after submitting search terms:
+      PlaceGroupIdxUtil.setInitialPlaceGroupIdx();
     }
   },
-  //
-  // createNoDupsArray: function (array) {
-  //   var idCollection = {}
-  //   var newArray = []
-  //
-  //   for (var i = 0; i < array.length; i++) {
-  //     var currId = array[i].id
-  //
-  //     if (typeof idCollection[currId] === "undefined") {
-  //       idCollection[currId] = true;
-  //       newArray.push(array[i]);
-  //     }
-  //   }
-  //
-  //   return newArray;
-  // }
+
+  createNoDupsArray: function (array) {
+    var idCollection = {}
+    var newArray = []
+
+    for (var i = 0; i < array.length; i++) {
+      var currId = array[i].id
+
+      if (typeof idCollection[currId] === "undefined") {
+        idCollection[currId] = true;
+        newArray.push(array[i]);
+      }
+    }
+
+    return newArray;
+  }
 
 }
 
